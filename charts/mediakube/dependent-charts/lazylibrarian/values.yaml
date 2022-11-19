@@ -1,0 +1,38 @@
+fullnameOverride: lazylibrarian
+image:
+  replicaCount: 1
+  repository: linuxserver/lazylibrarian
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 5299
+  hostname: lazylibrarian
+  domainPath: "books"
+  stripPath: true
+  env:
+    - name: TZ
+      value: UTC
+    - name: PGID
+      value: 0
+    - name: PUID
+      value: 0
+    - name: DOCKER_MODS
+      value: linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg
+  volumes:
+    storageClassName: nfs-client
+    configPath: /config
+    configCapacity: 10Mi
+    booksPath: /books
+    booksClaim: books-claim
+    downloadsPath: /downloads
+    downloadsClaim: downloads-claim
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "lazylibrarian"
+  
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
