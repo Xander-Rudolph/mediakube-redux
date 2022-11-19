@@ -1,0 +1,6 @@
+apiVersion: v2
+name: lazylibrarian
+description: A Helm chart for lazylibrarian deployed behind a traefik ingress
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

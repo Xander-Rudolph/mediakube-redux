@@ -1,0 +1,14 @@
+{{- if .Values.image.volumes.config }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "movies-claim"
+  namespace: {{ .Values.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.storage.storageClassNameMedia }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.capacityMedia}}
+{{- end }}

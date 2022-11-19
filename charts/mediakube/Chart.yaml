@@ -1,0 +1,44 @@
+apiVersion: v2
+name: mediakube
+description: A Helm chart for deploying an entire media stack with a traefik ingress
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+# home: 
+# icon:
+maintainers:
+- email: alex.rudolph.1987@gmail.com
+  name: Alex Rudolph
+  url: http://rudolphhome.privatedns.org
+
+dependencies:
+  - name: traefik
+    version: "^10"
+    repository: https://helm.traefik.io/traefik
+  - name: portainer
+    version: "^1"
+    repository: https://portainer.github.io/k8s/
+  - name: nfs-client-provisioner
+    version: "^1"
+    repository: https://supertetelman.github.io/charts/
+  - name: jackett
+    version: "^0"
+    repository: "file://dependent-charts/jackett"
+  - name: lazylibrarian
+    version: "^0"
+    repository: "file://dependent-charts/lazylibrarian"
+  - name: lidarr
+    version: "^0"
+    repository: "file://dependent-charts/lidarr"
+  - name: ombi
+    version: "^0"
+    repository: "file://dependent-charts/ombi"
+  - name: radarr
+    version: "^0"
+    repository: "file://dependent-charts/radarr"
+  - name: sonarr
+    version: "^0"
+    repository: "file://dependent-charts/sonarr"
+  - name: transmission
+    version: "^0"
+    repository: "file://dependent-charts/transmission"

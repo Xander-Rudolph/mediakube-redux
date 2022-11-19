@@ -1,0 +1,14 @@
+storage:
+  storageClassNameMedia: nfs-client 
+  capacityMedia: 10Gi
+
+# https://artifacthub.io/packages/helm/supertetelman/nfs-client-provisioner
+nfs-client-provisioner:
+  name: nfs-client
+  storageClass:
+    accessModes: ReadWriteMany
+    defaultClass: false # this might be worth it
+  nfs:
+    server: ip.add.res.s
+    path: /media
+    mountOptions: ReadWriteMany
