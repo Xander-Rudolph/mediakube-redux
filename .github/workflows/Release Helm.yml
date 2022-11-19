@@ -4,9 +4,13 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+    - ./charts/**    
   push:
     branches:
       - main
+    paths:
+    - ./charts/**    
     
 jobs:
   scan-version-bump:

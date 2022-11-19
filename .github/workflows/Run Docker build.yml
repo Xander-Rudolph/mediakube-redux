@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - ./docker/*
+      - ./docker/**
   push:
     branches:
       - main
     paths:
-      - ./docker/*    
+      - ./docker/**   
 
 jobs:
   docker-build:
