@@ -22,7 +22,7 @@ jobs:
         image: ['pia-vpn']
     steps:
       - name: Publish docker imagey
-        uses: .github/workflows/docker-publish.yml
+        uses: ./.github/workflows/docker-publish.yml
         with:
           image: ${{ matrix.image }}
           working_dir: ./docker/${{ matrix.image }}
