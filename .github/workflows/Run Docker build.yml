@@ -15,7 +15,7 @@ on:
 
 jobs:
   docker-build:
-    uses: xander-rudolph/mediakube-redux/.github/workflows/docker-publish.yml@pipeline-tweaks
+    uses: https://github.com/Xander-Rudolph/mediakube-redux/.github/workflows/docker-publish.yml@${{ github.ref_name }}
     strategy:
       matrix:
         image: ['pia-vpn']
