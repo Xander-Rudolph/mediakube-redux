@@ -16,14 +16,12 @@ on:
 jobs:
   docker-build:
     name: Run Docker Build
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     strategy:
       matrix:
         image: ['pia-vpn']
-    steps:
-      - name: Publish docker imagey
-        uses: ./.github/workflows/docker-publish.yml
-        with:
-          image: ${{ matrix.image }}
-          working_dir: ./docker/${{ matrix.image }}
-        secrets: inherit
+    uses: ./.github/workflows/docker-publish.yml
+    with:
+      image: ${{ matrix.image }}
+      working_dir: ./docker/${{ matrix.image }}
+    secrets: inherit
