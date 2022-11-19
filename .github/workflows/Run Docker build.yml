@@ -15,12 +15,15 @@ on:
 
 jobs:
   docker-build:
-    uses: https://github.com/Xander-Rudolph/mediakube-redux/.github/workflows/docker-publish.yml@${{ github.ref }}
-    strategy:
-      matrix:
-        image: ['pia-vpn']
+    uses: ./.github/workflows/docker-publish.yml
+    # uses: https://github.com/Xander-Rudolph/mediakube-redux/.github/workflows/docker-publish.yml@${{ github.ref }}
+    # strategy:
+    #   matrix:
+    #     image: ['pia-vpn']
     with:
-      image: ${{ matrix.image }}
+      image: pia-vpn
+      # image: ${{ matrix.image }}
       # optional
-      working_dir: ./docker/${{ matrix.image }}
+      working_dir: ./docker/pia-vpn
+      # working_dir: ./docker/${{ matrix.image }}
     secrets: inherit
