@@ -51,7 +51,7 @@ jobs:
           tag_prefix: ${{ inputs.version_prefix }}
           change_path: ${{ inputs.working_dir }}
           search_commit_body: true
-          # bump_each_commit: false
+          bump_each_commit: true
           # major_pattern: "(MAJOR)"
           # major_regexp_flags: ""
           # minor_pattern: "(MINOR)"
