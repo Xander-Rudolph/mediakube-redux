@@ -16,7 +16,7 @@ on:
 jobs:
   docker-build:
     # uses: https://github.com/Xander-Rudolph/.github/.github/workflows/docker-publish.yml@master
-    uses: ./docker-publish.yml
+    uses: ./.github/workflows/docker-publish.yml
     # strategy:
     #   matrix:
     #     image: ['pia-vpn']
