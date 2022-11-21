@@ -81,7 +81,14 @@ jobs:
         run: echo "TAGNAME=$(echo ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }} | awk '{print tolower($0)}')" >> $GITHUB_OUTPUT
 
       - name: debug
-        run: echo ${{ steps.meta.outputs.version }}
+        run: |
+          echo ${{ steps.meta.outputs.version }}
+          echo ${{ steps.meta.outputs.tags }}
+          echo ${{ steps.meta.outputs.labels }}
+          echo ${{ steps.meta.outputs.image }}
+          echo ${{ steps.version.outputs.version }}
+          echo ${{ steps.generate_tag.outputs.TAGNAME}}
+          echo ${{ github.event.repository.updated_at}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
@@ -89,10 +96,9 @@ jobs:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
           tags: |
-            ${{steps.generate_tag.outputs.TAGNAME}}:latest
-            ${{steps.generate_tag.outputs.TAGNAME}}:${{ steps. version.outputs.version }}
+            ${{ steps.generate_tag.outputs.TAGNAME}}:latest
+            ${{ steps.generate_tag.outputs.TAGNAME}}:${{ steps.version.outputs.version }}
             ${{ steps.meta.outputs.tags }}
-          # tags: ${{ steps.meta.outputs.version }}
           labels: |
             org.opencontainers.image.created=${{ github.event.repository.updated_at}}
             ${{ steps.meta.outputs.labels }}
