@@ -46,19 +46,16 @@ jobs:
           fetch-depth: 0
 
       # reference https://github.com/PaulHatch/semantic-version
-      - name: Docker Image Version
+      - name: Semantic Version - generate
         id: version
         uses: paulhatch/semantic-version@v4.0.2
         with:
           tag_prefix: ${{ inputs.version_prefix }}
           change_path: ${{ inputs.working_dir }}
           search_commit_body: true
-          bump_each_commit: true
+          format: "${major}.${minor}.${patch}-${increment}"
           # major_pattern: "(MAJOR)"
-          # major_regexp_flags: ""
-          # minor_pattern: "(MINOR)"
           # minor_regexp_flags: ""
-          format: "${major}.${minor}.${patch}-prerelease${increment}"
           # namespace: my-service
           # user_format_type: "csv"
 
@@ -69,23 +66,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # https://github.com/docker/metadata-action#tags-input
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4.1.1
         with:
           images: |
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
-          # tags: |
-          #   type=ref,event=branch
-          #   type=ref,event=pr
-          #   type=semver,pattern={{version}}
-          #   type=semver,pattern={{major}}.{{minor}}
-          #   type=sha
+          tags: |
+            type=semver,pattern=${{ steps.version.outputs.version }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{ steps.meta.outputs.tags }},${{ steps.version.outputs.version }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
