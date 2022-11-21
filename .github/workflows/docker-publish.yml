@@ -21,7 +21,7 @@ on:
       publish:
         required: false
         description: "toggle push action"
-        type: bool
+        type: boolean
         default: true
     secrets:
       GH_READPAT:
