@@ -42,7 +42,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
+          
       # reference https://github.com/PaulHatch/semantic-version
       - name: Docker Image Version
         id: version
@@ -56,7 +58,7 @@ jobs:
           # major_regexp_flags: ""
           # minor_pattern: "(MINOR)"
           # minor_regexp_flags: ""
-          # format: "${major}.${minor}.${patch}-prerelease${increment}"
+          format: "${major}.${minor}.${patch}-prerelease${increment}"
           # namespace: my-service
           # user_format_type: "csv"
 
@@ -85,5 +87,5 @@ jobs:
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }},${{ steps.version.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
