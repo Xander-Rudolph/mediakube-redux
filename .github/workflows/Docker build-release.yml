@@ -2,15 +2,15 @@ name: Build Docker images
 
 on:
   push:
-    # branches:
-    #   - main
-    # paths:
-    #   - ./docker/**   
+    branches:
+      - main
+    paths:
+      - ./docker/**
 
 jobs:
   docker-build:
-    uses: ./.github/workflows/docker-publish.yml
-    # uses: https://github.com/Xander-Rudolph/.github/.github/workflows/docker-publish.yml@master
+    # uses: ./.github/workflows/docker-publish.yml
+    uses: https://github.com/Xander-Rudolph/.github/.github/workflows/docker-publish.yml@master
     strategy:
       matrix:
         image: ['pia-vpn']

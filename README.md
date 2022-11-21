@@ -3,7 +3,7 @@
 I'll fix this later but for now... some to dos....
 
 - [ ] fix k8s volume settings
-- [ ] add vpn sidecar
+- [X] add vpn sidecar
 - [ ] setup https in traefik
 - [ ] setup login system
 - [ ] check for postgres support on sonarr/radarr/lidarr
