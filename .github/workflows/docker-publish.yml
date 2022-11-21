@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
+
       # reference https://github.com/PaulHatch/semantic-version
       - name: Docker Image Version
         id: version
@@ -87,5 +87,5 @@ jobs:
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{ steps.meta.outputs.tags }},${{ steps.version.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }},${{ steps.version.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
