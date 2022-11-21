@@ -74,9 +74,9 @@ jobs:
           images: |
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
             type=semver,pattern=${{ steps.version.outputs.version }}
+            type=semver,pattern={{version}}
+            type=ref,event=branch
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0

@@ -1,12 +1,6 @@
 name: Build Docker images
 
 on:
-  workflow_dispatch:
-  # pull_request:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - ./docker/**
   push:
     # branches:
     #   - main
