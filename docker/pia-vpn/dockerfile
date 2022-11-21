@@ -1,5 +1,10 @@
 FROM ubuntu:18.04
 
+LABEL org.opencontainers.image.title "pia-vpn"
+LABEL org.opencontainers.image.description "Sidecar image for PIA VPN"
+LABEL org.opencontainers.image.source "https://github.com/Xander-Rudolph/mediakube-redux"
+LABEL org.opencontainers.image.url "https://github.com/Xander-Rudolph/mediakube-redux" 
+
 ENV USERNAME=null
 ENV PASSWORD=null
 ENV REGION="us_east"

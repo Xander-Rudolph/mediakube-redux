@@ -1,0 +1,14 @@
+{{- if .Values.image.volumes.config }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ include ".helm.fullName" . }}-claim"
+  namespace: {{ .Values.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.image.volumes.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.image.volumes.configCapacity }}
+{{- end }}
