@@ -77,12 +77,15 @@ jobs:
       #       type=semver,pattern=${{ steps.version.outputs.version }}
       #       type=semver,pattern={{version}}
 
+      - id: tagname
+        run: INPUT=${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }} echo "::set-output name=lowerCaseValue::${INPUT,,}"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          tags: ${{steps.tagname.outputs.lowerCaseValue}}
           # tags: ${{ steps.meta.outputs.tags }}
           labels: |
             org.opencontainers.image.version=${{ steps.version.outputs.version }}
