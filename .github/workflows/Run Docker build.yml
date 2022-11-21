@@ -15,15 +15,13 @@ on:
 
 jobs:
   docker-build:
-    # uses: https://github.com/Xander-Rudolph/.github/.github/workflows/docker-publish.yml@master
     uses: ./.github/workflows/docker-publish.yml
-    # strategy:
-    #   matrix:
-    #     image: ['pia-vpn']
+    # uses: https://github.com/Xander-Rudolph/.github/.github/workflows/docker-publish.yml@master
+    strategy:
+      matrix:
+        image: ['pia-vpn']
     with:
-      image: pia-vpn
-      # image: ${{ matrix.image }}
+      image: ${{ matrix.image }}
       # optional
-      working_dir: ./docker/pia-vpn
-      # working_dir: ./docker/${{ matrix.image }}
+      working_dir: ./docker/${{ matrix.image }}
     secrets: inherit
