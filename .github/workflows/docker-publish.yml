@@ -77,15 +77,15 @@ jobs:
       #       type=semver,pattern=${{ steps.version.outputs.version }}
       #       type=semver,pattern={{version}}
 
-      - id: tagname
-        run: INPUT=${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }} echo "::set-output name=lowerCaseValue::${INPUT,,}"
+      - id: generate_tag
+        run: echo "TAGNAME=lowerCaseValue::${${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }},,}" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{steps.tagname.outputs.lowerCaseValue}}
+          tags: ${{steps.generate_tag.outputs.TAGNAME}}
           # tags: ${{ steps.meta.outputs.tags }}
           labels: |
             org.opencontainers.image.version=${{ steps.version.outputs.version }}
