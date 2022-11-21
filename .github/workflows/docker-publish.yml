@@ -78,7 +78,7 @@ jobs:
       #       type=semver,pattern={{version}}
 
       - id: generate_tag
-        run: echo "TAGNAME=$(echo '${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}').toLowerCase()" >> $GITHUB_OUTPUT
+        run: echo "TAGNAME=$(echo ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }} | awk '{print tolower($0)}')" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
