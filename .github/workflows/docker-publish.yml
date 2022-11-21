@@ -89,5 +89,7 @@ jobs:
           tags: ${{steps.generate_tag.outputs.TAGNAME}}
           # tags: ${{ steps.meta.outputs.tags }}
           labels: |
-            org.opencontainers.image.version=${{ steps.version.outputs.version }},latest
+            org.opencontainers.image.version=${{ steps. version.outputs.version }}
+            org.opencontainers.image.version=latest
+            org.opencontainers.image.version=${{ github.event.repository.updated_at}}
             org.opencontainers.image.created=${{ github.event.repository.updated_at}}
