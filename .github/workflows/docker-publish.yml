@@ -86,10 +86,9 @@ jobs:
         with:
           context: ${{ inputs.working_dir }}
           push: ${{ inputs.publish }}
-          tags: ${{steps.generate_tag.outputs.TAGNAME}}
+          tags: |
+            ${{steps.generate_tag.outputs.TAGNAME}}:latest
+            ${{steps.generate_tag.outputs.TAGNAME}}:${{ steps. version.outputs.version }}
           # tags: ${{ steps.meta.outputs.tags }}
           labels: |
-            org.opencontainers.image.version=${{ steps. version.outputs.version }}
-            org.opencontainers.image.version=latest
-            org.opencontainers.image.version=${{ github.event.repository.updated_at}}
             org.opencontainers.image.created=${{ github.event.repository.updated_at}}
