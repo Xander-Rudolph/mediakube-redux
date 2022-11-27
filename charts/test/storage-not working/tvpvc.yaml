@@ -1,0 +1,14 @@
+{{- if .Values.storage.volumes.config }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "tv-claim"
+  namespace: {{ .Values.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.storage.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.capacityMedia }}
+{{- end }}

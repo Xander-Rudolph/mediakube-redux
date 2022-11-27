@@ -53,17 +53,13 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          - name: downloads-vol
-            mountPath: {{ .Values.image.volumes.downloadsPath }}
           - name: config-vol
-            mountPath: {{ .Values.image.volumes.configPath }}
+            mountPath: /config
       volumes:
-        - name: downloads-vol
-          persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.downloadsClaim }}-claim"
         - name: config-vol
-          persistentVolumeClaim:
-            claimName: "{{ include ".helm.fullname" . }}-claim"
+          hostPath:
+            path: {{ .Values.image.volumes.configPath }}
+            type: DirectoryOrCreate
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

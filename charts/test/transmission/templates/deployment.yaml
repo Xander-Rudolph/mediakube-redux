@@ -53,19 +53,14 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          - name: movies-vol
-            mountPath: {{ .Values.image.volumes.moviesPath }}
           - name: downloads-vol
             mountPath: {{ .Values.image.volumes.downloadsPath }}
           - name: config-vol
             mountPath: {{ .Values.image.volumes.configPath }}
       volumes:
-        - name: movies-vol
-          persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.moviesClaim }}-claim"
         - name: downloads-vol
           persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.downloadsClaim }}-claim"
+            claimName: "{{ .Values.image.volumes.downloadsClaim }}-claim"
         - name: config-vol
           persistentVolumeClaim:
             claimName: "{{ include ".helm.fullname" . }}-claim"

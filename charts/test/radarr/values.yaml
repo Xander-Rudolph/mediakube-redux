@@ -1,12 +1,12 @@
-fullnameOverride: lidarr
+fullnameOverride: radarr
 image:
   replicaCount: 1
-  repository: linuxserver/lidarr
+  repository: linuxserver/radarr
   tag: "latest"
   pullPolicy: Always
-  containerPort: 8686
-  hostname: lidarr
-  domainPath: "music"
+  containerPort: 7878
+  hostname: radarr
+  domainPath: "movies"
   stripPath: true
   env:
     - name: TZ
@@ -19,15 +19,18 @@ image:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
-    musicPath: /music
-    musicClaim: music-claim
+    moviesPath: /movies
+    moviesClaim: movies-claim
     downloadsPath: /downloads
     downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
-  name: "lidarr"
+  name: "radarr"
   
 autoscaling:
   enabled: true

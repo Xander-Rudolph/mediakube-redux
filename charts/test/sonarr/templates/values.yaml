@@ -1,12 +1,12 @@
-fullnameOverride: ombi
+fullnameOverride: sonarr
 image:
   replicaCount: 1
-  repository: linuxserver/ombi
+  repository: linuxserver/sonarr
   tag: "latest"
   pullPolicy: Always
-  containerPort: 3579
-  hostname: ombi
-  domainPath: "search"
+  containerPort: 8989
+  hostname: sonarr
+  domainPath: "tv"
   stripPath: true
   env:
     - name: TZ
@@ -19,11 +19,18 @@ image:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
+    tvPath: /tv
+    tvClaim: tv-claim
+    downloadsPath: /downloads
+    downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
-  name: "ombi"
+  name: "sonarr"
   
 autoscaling:
   enabled: true

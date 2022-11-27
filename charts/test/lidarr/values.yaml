@@ -1,12 +1,12 @@
-fullnameOverride: lazylibrarian
+fullnameOverride: lidarr
 image:
   replicaCount: 1
-  repository: linuxserver/lazylibrarian
+  repository: linuxserver/lidarr
   tag: "latest"
   pullPolicy: Always
-  containerPort: 5299
-  hostname: lazylibrarian
-  domainPath: "books"
+  containerPort: 8686
+  hostname: lidarr
+  domainPath: "music"
   stripPath: true
   env:
     - name: TZ
@@ -15,21 +15,22 @@ image:
       value: 0
     - name: PUID
       value: 0
-    - name: DOCKER_MODS
-      value: linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg
   volumes:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
-    booksPath: /books
-    booksClaim: books-claim
+    musicPath: /music
+    musicClaim: music-claim
     downloadsPath: /downloads
     downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
-  name: "lazylibrarian"
+  name: "lidarr"
   
 autoscaling:
   enabled: true

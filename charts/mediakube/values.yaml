@@ -1,6 +1,9 @@
 storage:
-  storageClassNameMedia: nfs-client 
-  capacityMedia: 10Gi
+  storageClassName: nfs-client 
+  capacityMedia: 1024Gi
+  capacityConfig: 5Gi
+
+enableTraefikDashboard: true
 
 # https://artifacthub.io/packages/helm/supertetelman/nfs-client-provisioner
 nfs-client-provisioner:
@@ -9,6 +12,17 @@ nfs-client-provisioner:
     accessModes: ReadWriteMany
     defaultClass: false # this might be worth it
   nfs:
-    server: ip.add.res.s
-    path: /media
-    mountOptions: ReadWriteMany
+    server: 192.168.1.9
+    path: /Media
+    # mountOptions: ReadWriteMany
+
+# https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+nfs-subdir-external-provisioner:
+    nfs:
+      server: 192.168.1.9
+      path: /Media
+
+jackett:
+  image:
+    volumes:
+      configPath: /mnt/e/docker/jackett

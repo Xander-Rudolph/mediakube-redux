@@ -15,30 +15,32 @@ dependencies:
   - name: traefik
     version: "^10"
     repository: https://helm.traefik.io/traefik
-  - name: portainer
-    version: "^1"
-    repository: https://portainer.github.io/k8s/
-  - name: nfs-client-provisioner
-    version: "^1"
-    repository: https://supertetelman.github.io/charts/
   - name: jackett
     version: "^0"
-    repository: "file://dependent-charts/jackett"
-  - name: lazylibrarian
-    version: "^0"
-    repository: "file://dependent-charts/lazylibrarian"
-  - name: lidarr
-    version: "^0"
-    repository: "file://dependent-charts/lidarr"
-  - name: ombi
-    version: "^0"
-    repository: "file://dependent-charts/ombi"
-  - name: radarr
-    version: "^0"
-    repository: "file://dependent-charts/radarr"
-  - name: sonarr
-    version: "^0"
-    repository: "file://dependent-charts/sonarr"
-  - name: transmission
-    version: "^0"
-    repository: "file://dependent-charts/transmission"
+    repository: "file://charts/jackett"
+  # - name: portainer
+  #   version: "^1"
+  #   repository: https://portainer.github.io/k8s/
+  # - name: nfs-client-provisioner
+  #   version: "^1"
+  #   repository: https://supertetelman.github.io/charts/
+  # - name: nfs-subdir-external-provisioner
+  #   version: "^1"
+  #   repository: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+  # - name: lazylibrarian
+  #   version: "^0"
+  #   repository: "file://charts/lazylibrarian"
+  # - name: lidarr
+  #   version: "^0"
+  #   repository: "file://charts/lidarr"
+  # - name: ombi
+  #   version: "^0"
+  #   repository: "file://charts/ombi"
+  # - name: radarr
+  #   version: "^0"
+  #   repository: "file://charts/radarr"
+  # - name: sonarr
+  #   repository: "file://charts/sonarr"
+  # - name: transmission
+  #   version: "^0"
+  #   repository: "file://charts/transmission"

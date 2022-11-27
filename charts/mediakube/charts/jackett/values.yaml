@@ -6,29 +6,33 @@ image:
   pullPolicy: Always
   containerPort: 9117
   hostname: jackett
-  domainPath: "indexer"
-  stripPath: true
+  domainPath: "UI"
+  # domainPath: "indexer"
+  # stripPath: true
   env:
     - name: TZ
       value: UTC
     - name: PGID
-      value: 1000
+      value: "1000"
     - name: PUID
-      value: 1000
+      value: "1000"
   volumes:
-    storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
+    storageClassName: nfs-client
     downloadsPath: /downloads
     downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
   name: "jackett"
   
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80

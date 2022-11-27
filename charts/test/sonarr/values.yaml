@@ -1,12 +1,12 @@
-fullnameOverride: transmission
+fullnameOverride: sonarr
 image:
   replicaCount: 1
-  repository: linuxserver/transmission
+  repository: linuxserver/sonarr
   tag: "latest"
   pullPolicy: Always
-  containerPort: 9091
-  hostname: transmission
-  domainPath: "downloads"
+  containerPort: 8989
+  hostname: sonarr
+  domainPath: "tv"
   stripPath: true
   env:
     - name: TZ
@@ -15,19 +15,22 @@ image:
       value: 0
     - name: PUID
       value: 0
-    - name: TRANSMISSION_WEB_HOME
-      value: "/kettu/"
   volumes:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
+    tvPath: /tv
+    tvClaim: tv-claim
     downloadsPath: /downloads
     downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
-  name: "transmission"
+  name: "sonarr"
   
 autoscaling:
   enabled: true

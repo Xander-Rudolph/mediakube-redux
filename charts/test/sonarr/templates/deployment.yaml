@@ -62,10 +62,10 @@ spec:
       volumes:
         - name: tv-vol
           persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.tvClaim }}-claim"
+            claimName: "{{ .Values.image.volumes.tvClaim }}-claim"
         - name: downloads-vol
           persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.downloadsClaim }}-claim"
+            claimName: "{{ .Values.image.volumes.downloadsClaim }}-claim"
         - name: config-vol
           persistentVolumeClaim:
             claimName: "{{ include ".helm.fullname" . }}-claim"

@@ -1,0 +1,15 @@
+{{- if .Values.storage.volumes.config }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "books-claim"
+  namespace: {{ .Values.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: {{ .Values.storage.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.capacityMedia}}
+{{- end }}

@@ -1,12 +1,12 @@
-fullnameOverride: sonarr
+fullnameOverride: lazylibrarian
 image:
   replicaCount: 1
-  repository: linuxserver/sonarr
+  repository: linuxserver/lazylibrarian
   tag: "latest"
   pullPolicy: Always
-  containerPort: 8989
-  hostname: sonarr
-  domainPath: "tv"
+  containerPort: 5299
+  hostname: lazylibrarian
+  domainPath: "books"
   stripPath: true
   env:
     - name: TZ
@@ -15,19 +15,24 @@ image:
       value: 0
     - name: PUID
       value: 0
+    - name: DOCKER_MODS
+      value: linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg
   volumes:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
-    tvPath: /tv
-    tvClaim: tv-claim
+    booksPath: /books
+    booksClaim: books-claim
     downloadsPath: /downloads
     downloadsClaim: downloads-claim
 
+service:
+  type: ClusterIP
+  
 serviceAccount:
   create: true
   annotations: {}
-  name: "sonarr"
+  name: "lazylibrarian"
   
 autoscaling:
   enabled: true

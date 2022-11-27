@@ -1,12 +1,12 @@
-fullnameOverride: radarr
+fullnameOverride: ombi
 image:
   replicaCount: 1
-  repository: linuxserver/radarr
+  repository: linuxserver/ombi
   tag: "latest"
   pullPolicy: Always
-  containerPort: 7878
-  hostname: radarr
-  domainPath: "movies"
+  containerPort: 3579
+  hostname: ombi
+  domainPath: "search"
   stripPath: true
   env:
     - name: TZ
@@ -19,15 +19,14 @@ image:
     storageClassName: nfs-client
     configPath: /config
     configCapacity: 10Mi
-    moviesPath: /movies
-    moviesClaim: movies-claim
-    downloadsPath: /downloads
-    downloadsClaim: downloads-claim
+
+service:
+  type: ClusterIP
 
 serviceAccount:
   create: true
   annotations: {}
-  name: "radarr"
+  name: "ombi"
   
 autoscaling:
   enabled: true
