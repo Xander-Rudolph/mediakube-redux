@@ -1,11 +1,11 @@
 #!/bin/sh
 
 #this script is based on https://hub.docker.com/r/itsdaspecialk/pia-openvpn/
-echo "starting... " > debug.log
+echo "starting... "
 
 set -e -u -o pipefail
 
-#activate_firewall based on code from dperson/openvpn-client
+# activate_firewall based on code from dperson/openvpn-client
 activate_firewall() {
   # the VPN Port
   local port=1197
@@ -41,7 +41,7 @@ if [ -n "$REGION" ] && [ -n "$CONNECTIONSTRENGTH" ]; then
   ARGS="${ARGS}--config \"${CONNECTIONSTRENGTH}/${REGION}.ovpn\""
 fi
 
-echo "connection args complete... " >> debug.log
+echo "connection args complete... "
 
 if [ -n "${USERNAME:-""}" -a -n "${PASSWORD:-""}" ]; then
   echo "$USERNAME" > auth.conf
@@ -50,20 +50,20 @@ if [ -n "${USERNAME:-""}" -a -n "${PASSWORD:-""}" ]; then
   ARGS="$ARGS --auth-user-pass auth.conf"
 fi
 
-echo "auth args complete... " >> debug.log
+echo "auth args complete... "
 
 for ARG in $@; do
   ARGS="$ARGS \"$ARG\""
 done
 
 activate_firewall
-echo "activate firewall complete... " >> debug.log
+echo "activate firewall complete... "
 
 mkdir -p /dev/net
 if [ ! -c /dev/net/tun ]; then
   mknod -m 0666 /dev/net/tun c 10 200
 fi
 
-echo "$ARGS" >> debug.log
+echo "using the following args: \n$ARGS"
 
 exec sg vpn -c "openvpn $ARGS"

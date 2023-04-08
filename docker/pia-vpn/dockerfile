@@ -26,4 +26,4 @@ COPY openvpn.sh /pia/openvpn.sh
 
 WORKDIR /pia
 
-CMD ["bash","/pia/openvpn.sh"]
+ENTRYPOINT ["sh","/pia/openvpn.sh"]
