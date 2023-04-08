@@ -47,15 +47,22 @@ NOTE: ensure that you are in the mediakube folder before execution
 ```
 export filename=./values.yaml
 # update these values to set the helm chart values file
-export server=
-export config=
-export media=
-export subdomains=
-export token=
-export username=
-export password=
-export vpn_username=
-export vpn_password=
+# nfs
+export server= "127.0.0.1"
+export config= "/config"
+export media= "/media"
+
+# duckdns
+export subdomains= "subdomain1,subdomain2"
+export token= "token"
+
+# transmission
+export username= "admin"
+export password= "Password"
+
+# transmission.vpn
+export vpn_username= "p000000"
+export vpn_password= "YoUrSeCuRePaSsWoRd"
 
 sed -i "s/YOUR_NFS_SERVER/$server/g" $filename
 sed -i "s/YOUR_CONFIG_PATH/$config/g" $filename
@@ -70,19 +77,27 @@ helm upgrade -i mediakube .
 ```
 
 ## Windows (powershell)
-NOTE: ensure that you are in the mediakube folder before execution
+NOTE: this powershell script should be located in the mediakube chart folder root
 ```
-$filename=./values.yaml
+pushd $PSScriptRoot
+$filename="./values.yaml"
 # update these values to set the helm chart values file
-$server=
-$config=
-$media=
-$subdomains=
-$token=
-$username=
-$password=
-$vpn_username=
-$vpn_password=
+# nfs
+$server= "127.0.0.1"
+$config= "/config"
+$media= "/media"
+
+# duckdns
+$subdomains= "subdomain1,subdomain2"
+$token= "token"
+
+# transmission
+$username= "admin"
+$password= "Password"
+
+# transmission.vpn
+$vpn_username= "p000000"
+$vpn_password= "YoUrSeCuRePaSsWoRd"
 
 (Get-Content $filename).Replace('YOUR_NFS_SERVER',$server) | Set-Content $filename
 (Get-Content $filename).Replace('YOUR_CONFIG_PATH',$config) | Set-Content $filename
@@ -93,5 +108,10 @@ $vpn_password=
 (Get-Content $filename).Replace('YOUR_PASSWORD',$password) | Set-Content $filename
 (Get-Content $filename).Replace('YOUR_PIA_USERNAME',$vpn_username) | Set-Content $filename
 (Get-Content $filename).Replace('YOUR_PIA_PASSWORD',$vpn_password) | Set-Content $filename
+if(-not (test-path Chart.lock))
+{
+    helm dependency build
+}
 helm upgrade -i mediakube .
+popd
 ```
