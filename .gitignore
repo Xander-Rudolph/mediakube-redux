@@ -2,3 +2,4 @@
 **/Chart.lock
 **/*.tgz
 .env
+**/*.ps1

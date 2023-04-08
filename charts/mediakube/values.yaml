@@ -73,7 +73,6 @@ transmission:
     username: YOUR_PIA_USERNAME
     password: YOUR_PIA_PASSWORD
 
-
-# ombi:
-#   configPath: ombi
-#   fullnameOverride: ombi
+ombi:
+  configPath: ombi
+  fullnameOverride: ombi

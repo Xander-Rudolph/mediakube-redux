@@ -40,6 +40,10 @@ Localization for specific timezones will automatically apply to all the linuxser
 this is the `root` user and `root` group in linux so if the NFS has security configurations, this should be set appropriately
 
 # Example usage
+The following sections will outline how to run the script
+
+## linux/mac
+NOTE: ensure that you are in the mediakube folder before execution
 ```
 export filename=./values.yaml
 # update these values to set the helm chart values file
@@ -62,5 +66,32 @@ sed -i "s/YOUR_USERNAME/$username/g" $filename
 sed -i "s/YOUR_PASSWORD/$password/g" $filename
 sed -i "s/YOUR_PIA_USERNAME/$vpn_username/g" $filename
 sed -i "s/YOUR_PIA_PASSWORD/$vpn_password/g" $filename
+helm upgrade -i mediakube .
+```
+
+## Windows (powershell)
+NOTE: ensure that you are in the mediakube folder before execution
+```
+$filename=./values.yaml
+# update these values to set the helm chart values file
+$server=
+$config=
+$media=
+$subdomains=
+$token=
+$username=
+$password=
+$vpn_username=
+$vpn_password=
+
+(Get-Content $filename).Replace('YOUR_NFS_SERVER',$server) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_CONFIG_PATH',$config) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_MEDIA_PATH',$media) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_SUBDOMAINS',$subdomains) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_DNS_TOKEN',$token) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_USERNAME',$username) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_PASSWORD',$password) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_PIA_USERNAME',$vpn_username) | Set-Content $filename
+(Get-Content $filename).Replace('YOUR_PIA_PASSWORD',$vpn_password) | Set-Content $filename
 helm upgrade -i mediakube .
 ```
