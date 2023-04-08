@@ -1,0 +1,21 @@
+image:
+  repository: lscr.io/linuxserver/readarr
+  tag: "develop"
+  pullPolicy: Always
+  containerPort: 8787
+  hostname: readarr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "readarr"

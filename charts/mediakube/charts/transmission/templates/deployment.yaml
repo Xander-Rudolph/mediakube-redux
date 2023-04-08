@@ -2,13 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include ".helm.fullname" . }}
-  namespace: {{ .Values.namespace }}
   labels:
     {{- include ".helm.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.image.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include ".helm.selectorLabels" . | nindent 6 }}
@@ -31,11 +27,6 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        {{- if .Values.sidecarimage }}
-        - name: "{{ .Values.sidecarimage.name }}"
-          image: "{{ .Values.sidecarimage.repository }}:{{ .Values.sidecarimage.tag }}"
-          imagePullPolicy: {{ .Values.sidecarimage.pullPolicy }}
-        {{- end }}      
         - name: {{ include ".helm.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -45,6 +36,11 @@ spec:
           env: 
             {{- toYaml .Values.image.env | nindent 12 }}
           {{- end }}
+          envFrom:
+            - secretRef:
+                name: "{{ .Release.Name }}-transmission-secret"
+            - configMapRef:
+                name: "{{ .Release.Name }}-configmap"
           args: [ {{.Values.image.args}} ]
           ports:
             - name: http
@@ -53,17 +49,25 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          - name: downloads-vol
-            mountPath: {{ .Values.image.volumes.downloadsPath }}
-          - name: config-vol
-            mountPath: {{ .Values.image.volumes.configPath }}
+            - name: downloads-vol
+              mountPath: /downloads
+            - name: config-vol
+              mountPath: /config
+        - name: "{{ .Values.sidecarimage.name }}"
+          image: "{{ .Values.sidecarimage.repository }}:{{ .Values.sidecarimage.tag }}"
+          imagePullPolicy: {{ .Values.sidecarimage.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: "{{ .Release.Name }}-vpn-secret"
+            - configMapRef:
+                name: "{{ .Release.Name }}-vpn-configmap"
       volumes:
         - name: downloads-vol
           persistentVolumeClaim:
-            claimName: "{{ Values.image.volumes.downloadsClaim }}-claim"
+            claimName: {{ .Release.Name }}-media-pvc
         - name: config-vol
           persistentVolumeClaim:
-            claimName: "{{ include ".helm.fullname" . }}-claim"
+            claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

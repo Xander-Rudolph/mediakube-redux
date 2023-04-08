@@ -1,36 +1,21 @@
-fullnameOverride: lidarr
 image:
-  replicaCount: 1
   repository: linuxserver/lidarr
   tag: "latest"
   pullPolicy: Always
   containerPort: 8686
   hostname: lidarr
-  domainPath: "music"
-  stripPath: true
-  env:
-    - name: TZ
-      value: UTC
-    - name: PGID
-      value: 0
-    - name: PUID
-      value: 0
-  volumes:
-    storageClassName: nfs-client
-    configPath: /config
-    configCapacity: 10Mi
-    musicPath: /music
-    musicClaim: music-claim
-    downloadsPath: /downloads
-    downloadsClaim: downloads-claim
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
 
 serviceAccount:
   create: true
   annotations: {}
   name: "lidarr"
-  
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 80

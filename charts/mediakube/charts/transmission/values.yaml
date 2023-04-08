@@ -1,36 +1,38 @@
-fullnameOverride: transmission
 image:
-  replicaCount: 1
   repository: linuxserver/transmission
   tag: "latest"
   pullPolicy: Always
   containerPort: 9091
   hostname: transmission
-  domainPath: "downloads"
-  stripPath: true
-  env:
-    - name: TZ
-      value: UTC
-    - name: PGID
-      value: 0
-    - name: PUID
-      value: 0
-    - name: TRANSMISSION_WEB_HOME
-      value: "/kettu/"
-  volumes:
-    storageClassName: nfs-client
-    configPath: /config
-    configCapacity: 10Mi
-    downloadsPath: /downloads
-    downloadsClaim: downloads-claim
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+  #   - name: TRANSMISSION_WEB_HOME
+  #     value: "/kettu/"
+
+username: YOUR_USERNAME
+password: YOUR_PASSWORD
+
+vpn:
+  username: YOUR_VPN_USERNAME
+  password: YOUR_VPN_PASSWORD
+  region: us_east # EX us_east, us_west
+  connectionStrength: strong
+
+sidecarimage:
+  name: pia-vpn
+  repository: xanderu/pia-vpn
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
 
 serviceAccount:
   create: true
   annotations: {}
   name: "transmission"
-  
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 80

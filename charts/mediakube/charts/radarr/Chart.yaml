@@ -1,6 +1,6 @@
 apiVersion: v2
 name: radarr
-description: A Helm chart for radarr deployed behind a traefik ingress
+description: A Helm chart for deploying the radarr front end
 type: application
 version: 0.0.1
 appVersion: "0.0.1"

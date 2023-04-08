@@ -1,44 +1,47 @@
 apiVersion: v2
-name: mediakube
-description: A Helm chart for deploying an entire media stack with a traefik ingress
+name: media-kube
+description: A Helm chart for transmission deployed behind a traefik ingress
 type: application
-version: 0.0.1
+version: 1.0.0
 appVersion: "0.0.1"
-# home: 
-# icon:
-maintainers:
-- email: alex.rudolph.1987@gmail.com
-  name: Alex Rudolph
-  url: http://rudolphhome.privatedns.org
-
 dependencies:
   - name: traefik
-    version: "^10"
+    version: "^10.24.2"
     repository: https://helm.traefik.io/traefik
-  - name: portainer
-    version: "^1"
-    repository: https://portainer.github.io/k8s/
-  - name: nfs-client-provisioner
-    version: "^1"
-    repository: https://supertetelman.github.io/charts/
-  - name: jackett
+  - name: duckdns
     version: "^0"
-    repository: "file://dependent-charts/jackett"
-  - name: lazylibrarian
-    version: "^0"
-    repository: "file://dependent-charts/lazylibrarian"
+    repository: "file://./charts/duckdns"
   - name: lidarr
     version: "^0"
-    repository: "file://dependent-charts/lidarr"
+    repository: "file://./charts/lidarr"
   - name: ombi
+    # TODO: need to fix the ingress
     version: "^0"
-    repository: "file://dependent-charts/ombi"
+    repository: "file://./charts/ombi"
+  - name: overseerr
+    version: "^0"
+    repository: "file://./charts/overseerr"
+  - name: prowlarr
+    version: "^0"
+    repository: "file://./charts/prowlarr"
   - name: radarr
     version: "^0"
-    repository: "file://dependent-charts/radarr"
+    repository: "file://./charts/radarr"
+  - name: readarr
+    version: "^0"
+    repository: "file://./charts/readarr"
+  - name: requestrr
+    version: "^0"
+    repository: "file://./charts/requestrr"
   - name: sonarr
     version: "^0"
-    repository: "file://dependent-charts/sonarr"
+    repository: "file://./charts/sonarr"
   - name: transmission
     version: "^0"
-    repository: "file://dependent-charts/transmission"
+    repository: "file://./charts/transmission"
+  # - name: jackett
+  #   version: "^0"
+  #   repository: "file://./charts/jackett"
+  # - name: lazylibrarian
+  #   version: "^0"
+  #   repository: "file://./charts/lazylibrarian"

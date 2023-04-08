@@ -1,14 +1,79 @@
-storage:
-  storageClassNameMedia: nfs-client 
-  capacityMedia: 10Gi
-
-# https://artifacthub.io/packages/helm/supertetelman/nfs-client-provisioner
-nfs-client-provisioner:
-  name: nfs-client
-  storageClass:
-    accessModes: ReadWriteMany
-    defaultClass: false # this might be worth it
+#################
+# Global config #
+#################
+global:
   nfs:
-    server: ip.add.res.s
-    path: /media
-    mountOptions: ReadWriteMany
+    server: YOUR_NFS_SERVER
+  configPath: YOUR_CONFIG_PATH
+  configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by 6 (or the number of services that will be deployed)
+  mediaPath: YOUR_MEDIA_PATH
+  mediaCapacity: 15Ti
+  # linuxserver common variables
+  timezone: Etc/UTC
+  PGID: 0
+  PUID: 0
+
+##################
+# Network config #
+##################
+enableTraefikDashboard: true
+creds:
+  user: administrator
+  password: Dashboard
+
+duckdns:
+  fullnameOverride: duckdns
+  subdomains: YOUR_SUBDOMAINS
+  token: YOUR_DNS_TOKEN
+
+# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml  
+traefik:
+  image:
+    pullPolicy: Always
+  service:
+    type: LoadBalancer
+
+##################
+# Service config #
+##################
+lidarr:
+  configPath: lidarr
+  fullnameOverride: lidarr
+
+overseerr:
+  configPath: overseerr
+  fullnameOverride: overseerr
+
+prowlarr:
+  configPath: prowlarr
+  fullnameOverride: prowlarr
+
+radarr:
+  configPath: radarr
+  fullnameOverride: radarr
+
+readarr:
+  configPath: readarr
+  fullnameOverride: readarr
+
+requestrr:
+  configPath: requestrr
+  fullnameOverride: requestrr
+
+sonarr:
+  configPath: sonarr
+  fullnameOverride: sonarr
+
+transmission:
+  configPath: transmission
+  fullnameOverride: transmission
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+  vpn:
+    username: YOUR_PIA_USERNAME
+    password: YOUR_PIA_PASSWORD
+
+
+# ombi:
+#   configPath: ombi
+#   fullnameOverride: ombi

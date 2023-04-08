@@ -1,6 +1,6 @@
 apiVersion: v2
 name: lidarr
-description: A Helm chart for lidarr deployed behind a traefik ingress
+description: A Helm chart for deploying the lidarr front end
 type: application
 version: 0.0.1
 appVersion: "0.0.1"
