@@ -1,0 +1,13 @@
+image:
+  repository: linuxserver/duckdns
+  tag: "latest"
+  pullPolicy: Always
+  hostname: duckdns
+
+subdomains: subdomain1,subdomain2
+token: token
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "duckdns"

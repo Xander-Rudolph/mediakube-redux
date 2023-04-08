@@ -1,0 +1,21 @@
+image:
+  repository: lscr.io/linuxserver/prowlarr
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 9696
+  hostname: prowlarr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "prowlarr"

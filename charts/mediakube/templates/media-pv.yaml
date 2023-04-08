@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: {{ .Release.Name }}-media-pv
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: {{ .Values.global.mediaCapacity }}
+  nfs:
+    path: {{ .Values.global.mediaPath }}
+    server: {{ .Values.global.nfs.server }}
+  mountOptions:
+    - nfsvers=4.1
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: {{ .Release.Name }}-media-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.global.mediaCapacity }}
+  selector: {}
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: {{ .Release.Name }}-media-pv

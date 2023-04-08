@@ -1,0 +1,21 @@
+image:
+  repository: linuxserver/sonarr
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 8989
+  hostname: sonarr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "sonarr"

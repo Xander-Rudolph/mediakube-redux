@@ -1,28 +1,79 @@
-storage:
-  storageClassName: nfs-client 
-  capacityMedia: 1024Gi
-  capacityConfig: 5Gi
-
-enableTraefikDashboard: true
-
-# https://artifacthub.io/packages/helm/supertetelman/nfs-client-provisioner
-nfs-client-provisioner:
-  name: nfs-client
-  storageClass:
-    accessModes: ReadWriteMany
-    defaultClass: false # this might be worth it
+#################
+# Global config #
+#################
+global:
   nfs:
-    server: 192.168.1.9
-    path: /Media
-    # mountOptions: ReadWriteMany
+    server: YOUR_NFS_SERVER
+  configPath: YOUR_CONFIG_PATH
+  configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by 6 (or the number of services that will be deployed)
+  mediaPath: YOUR_MEDIA_PATH
+  mediaCapacity: 15Ti
+  # linuxserver common variables
+  timezone: Etc/UTC
+  PGID: 0
+  PUID: 0
 
-# https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
-nfs-subdir-external-provisioner:
-    nfs:
-      server: 192.168.1.9
-      path: /Media
+##################
+# Network config #
+##################
+enableTraefikDashboard: true
+creds:
+  user: administrator
+  password: Dashboard
 
-jackett:
+duckdns:
+  fullnameOverride: duckdns
+  subdomains: YOUR_SUBDOMAINS
+  token: YOUR_DNS_TOKEN
+
+# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml  
+traefik:
   image:
-    volumes:
-      configPath: /mnt/e/docker/jackett
+    pullPolicy: Always
+  service:
+    type: LoadBalancer
+
+##################
+# Service config #
+##################
+lidarr:
+  configPath: lidarr
+  fullnameOverride: lidarr
+
+overseerr:
+  configPath: overseerr
+  fullnameOverride: overseerr
+
+prowlarr:
+  configPath: prowlarr
+  fullnameOverride: prowlarr
+
+radarr:
+  configPath: radarr
+  fullnameOverride: radarr
+
+readarr:
+  configPath: readarr
+  fullnameOverride: readarr
+
+requestrr:
+  configPath: requestrr
+  fullnameOverride: requestrr
+
+sonarr:
+  configPath: sonarr
+  fullnameOverride: sonarr
+
+transmission:
+  configPath: transmission
+  fullnameOverride: transmission
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+  vpn:
+    username: YOUR_PIA_USERNAME
+    password: YOUR_PIA_PASSWORD
+
+
+# ombi:
+#   configPath: ombi
+#   fullnameOverride: ombi

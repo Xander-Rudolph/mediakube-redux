@@ -1,0 +1,21 @@
+image:
+  repository: lscr.io/linuxserver/requestrr
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 4545
+  hostname: requestrr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "requestrr"

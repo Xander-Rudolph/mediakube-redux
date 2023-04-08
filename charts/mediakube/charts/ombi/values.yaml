@@ -1,0 +1,18 @@
+image:
+  replicaCount: 1
+  repository: linuxserver/ombi
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 3579
+  hostname: ombi
+  env:
+    - name: BASE_URL
+      value: /ombi
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "ombi"

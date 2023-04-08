@@ -1,0 +1,21 @@
+image:
+  repository: linuxserver/lidarr
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 8686
+  hostname: lidarr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "lidarr"

@@ -1,6 +1,0 @@
-apiVersion: v2
-name: jackett
-description: A Helm chart for jackett deployed behind a traefik ingress
-type: application
-version: 0.0.1
-appVersion: "0.0.1"
