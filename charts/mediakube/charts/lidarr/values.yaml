@@ -1,5 +1,5 @@
 image:
-  repository: linuxserver/lidarr
+  repository: lscr.io/linuxserver/lidarr
   tag: "latest"
   pullPolicy: Always
   containerPort: 8686

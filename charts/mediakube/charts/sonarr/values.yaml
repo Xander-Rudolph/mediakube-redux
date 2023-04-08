@@ -1,5 +1,5 @@
 image:
-  repository: linuxserver/sonarr
+  repository: lscr.io/linuxserver/sonarr
   tag: "latest"
   pullPolicy: Always
   containerPort: 8989

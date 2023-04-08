@@ -1,5 +1,5 @@
 image:
-  repository: linuxserver/duckdns
+  repository: lscr.io/linuxserver/duckdns
   tag: "latest"
   pullPolicy: Always
   hostname: duckdns

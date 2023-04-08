@@ -1,6 +1,6 @@
 image:
   replicaCount: 1
-  repository: linuxserver/ombi
+  repository: lscr.io/linuxserver/ombi
   tag: "latest"
   pullPolicy: Always
   containerPort: 3579

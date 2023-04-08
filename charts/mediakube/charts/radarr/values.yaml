@@ -1,5 +1,5 @@
 image:
-  repository: linuxserver/radarr
+  repository: lscr.io/linuxserver/radarr
   tag: "latest"
   pullPolicy: Always
   containerPort: 7878

@@ -1,5 +1,5 @@
 image:
-  repository: linuxserver/transmission
+  repository: lscr.io/linuxserver/transmission
   tag: "latest"
   pullPolicy: Always
   containerPort: 9091
