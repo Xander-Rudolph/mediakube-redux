@@ -10,7 +10,7 @@ spec:
   capacity:
     storage: {{ .Values.global.configCapacity }}
   nfs:
-    path: {{ .Values.global.configPath }}{{ .Values.configPath }}
+    path: {{ .Values.global.configPath }}/{{ .Values.configPath }}
     server: {{ .Values.global.nfs.server }}
   mountOptions:
     - nfsvers=4.1

@@ -25,7 +25,7 @@ vpn:
 
 sidecarimage:
   name: pia-vpn
-  repository: xanderu/pia-vpn
+  repository: ghcr.io/xander-rudolph/pia-vpn
   tag: latest
   pullPolicy: Always
 
