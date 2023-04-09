@@ -1,0 +1,38 @@
+# Based on the issue template
+name: Bug report
+description: Create a report to help us improve
+title: "[BUG] <title>"
+labels: [Bug]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: textarea
+    attributes:
+      label: Behavior
+      description: Explain the issue.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: Steps to reproduce the issue.
+      placeholder: |
+        1. After installing with Helm
+        2. What network steps have you tested
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      description: |
+        Provide a docker log output
+      label: Container logs
+      placeholder: |
+        Output of `kubectl logs pod/<container-name>`
+      render: bash
+    validations:
+      required: true

@@ -16,3 +16,7 @@ serviceAccount:
   create: true
   annotations: {}
   name: "ombi"
+
+securityContext:
+  runAsUser: 0
+  runAsGroup: 0

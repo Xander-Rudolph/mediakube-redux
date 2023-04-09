@@ -18,9 +18,6 @@ dependencies:
     # TODO: need to fix the ingress
     version: "^0"
     repository: "file://./charts/ombi"
-  - name: overseerr
-    version: "^0"
-    repository: "file://./charts/overseerr"
   - name: prowlarr
     version: "^0"
     repository: "file://./charts/prowlarr"

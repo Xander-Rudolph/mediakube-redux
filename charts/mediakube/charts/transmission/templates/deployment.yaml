@@ -53,14 +53,14 @@ spec:
               mountPath: /downloads
             - name: config-vol
               mountPath: /config
-        - name: "{{ .Values.sidecarimage.name }}"
-          image: "{{ .Values.sidecarimage.repository }}:{{ .Values.sidecarimage.tag }}"
-          imagePullPolicy: {{ .Values.sidecarimage.pullPolicy }}
-          envFrom:
-            - secretRef:
-                name: "{{ .Release.Name }}-vpn-secret"
-            - configMapRef:
-                name: "{{ .Release.Name }}-vpn-configmap"
+        # - name: "{{ .Values.sidecarimage.name }}"
+        #   image: "{{ .Values.sidecarimage.repository }}:{{ .Values.sidecarimage.tag }}"
+        #   imagePullPolicy: {{ .Values.sidecarimage.pullPolicy }}
+        #   envFrom:
+        #     - secretRef:
+        #         name: "{{ .Release.Name }}-vpn-secret"
+        #     - configMapRef:
+        #         name: "{{ .Release.Name }}-vpn-configmap"
       volumes:
         - name: downloads-vol
           persistentVolumeClaim:
