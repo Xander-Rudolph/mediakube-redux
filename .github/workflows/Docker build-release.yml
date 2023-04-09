@@ -2,19 +2,36 @@ name: Build Docker images
 
 on:
   push:
-    branches:
-      - main
     paths:
       - ./docker/**
+      - ./.github/workflows/Docker build-release.yml
+  pull_request:
 
 jobs:
+  review:
+    if: ${{ github.event_name == 'pull_request' }}
+    permissions: write-all # Check permission when leave comment action failed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: OpenAI PR Review
+        uses: detectiveCrow/ai-review-action@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+#           LANGUAGE: "english"
+#           MODEL: "gpt-3.5-turbo"
+
   docker-build:
+    if: ${{ github.event_name != 'pull_request' }}
     uses: htaic/.github/.github/workflows/build-docker.yml@main
     strategy:
       matrix:
         image: ['pia-vpn']
     with:
-      image: ${{ matrix.image }}
+      image_name: ${{ matrix.image }}
       # optional
       working_dir: ./docker/${{ matrix.image }}
+      trigger_release: ${{ github.ref_name == 'main' }}
     secrets: inherit
