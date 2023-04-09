@@ -2,10 +2,9 @@ name: Build Docker images
 
 on:
   push:
-    branches:
-      - main
     paths:
       - ./docker/**
+      - ./.github/workflows/Docker build-release.yml
   pull_request:
 
 jobs:
@@ -34,4 +33,5 @@ jobs:
       image_name: ${{ matrix.image }}
       # optional
       working_dir: ./docker/${{ matrix.image }}
+      trigger_release: ${{ github.ref_name == 'main' }}
     secrets: inherit
