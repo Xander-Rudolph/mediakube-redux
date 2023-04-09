@@ -1,0 +1,15 @@
+{{- if .Values.startUp }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include ".helm.fullname" . }}-startup"
+data:
+  {{- if (hasKey .Values.startUp "sqlFileContent") }}
+  configdata.sql: |
+{{ .Values.startUp.sqlFileContent | indent 4 }}
+  {{- end }}
+  {{- if (hasKey .Values.startUp "scriptContent") }}
+  configdata.sh: |
+{{ .Values.startUp.scriptContent | indent 4 }}
+  {{- end }}
+{{- end }}

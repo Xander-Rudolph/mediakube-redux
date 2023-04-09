@@ -1,0 +1,41 @@
+postgres:
+  hostname: postgres
+  db: postgres
+  user: postgres
+  password: "YOUR_POSTGRES_PASSWORD"
+  repository: postgres
+  tag: 14
+  pullPolicy: Always
+  containerPort: 5432
+  mountPath: /var/lib/postgresql/data
+  env:
+    # https://hub.docker.com/_/postgres
+    - name: PGDATA
+      value: /var/lib/postgresql/data/pgdata
+
+startUp:
+  scriptContent: |
+      echo "Nothing to run" > /var/lib/postgresql/data/thiswillbeinthePV.txt
+  sqlFileContent: |
+    SELECT 'CREATE DATABASE radarr-main '
+    'WITH '
+    'ENCODING = ''UTF8'' '
+    'CONNECTION LIMIT = -1 '
+    'IS_TEMPLATE = False'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarr-main')\gexec
+    ;
+    SELECT 'CREATE DATABASE radarr-log '
+    'WITH '
+    'ENCODING = ''UTF8'' '
+    'CONNECTION LIMIT = -1 '
+    'IS_TEMPLATE = False'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarr-log')\gexec
+    ;
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "postgres"

@@ -40,9 +40,13 @@ lidarr:
   configPath: lidarr
   fullnameOverride: lidarr
 
-overseerr:
-  configPath: overseerr
-  fullnameOverride: overseerr
+ombi:
+  configPath: ombi
+  fullnameOverride: ombi
+
+postgres:
+  configPath: postgres
+  password: "YOUR_POSTGRES_PASSWORD"
 
 prowlarr:
   configPath: prowlarr
@@ -72,7 +76,3 @@ transmission:
   vpn:
     username: YOUR_PIA_USERNAME
     password: YOUR_PIA_PASSWORD
-
-ombi:
-  configPath: ombi
-  fullnameOverride: ombi

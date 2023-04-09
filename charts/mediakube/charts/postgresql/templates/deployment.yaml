@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include ".helm.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include ".helm.labels" . | nindent 4 }}
 spec:
@@ -17,46 +18,50 @@ spec:
       labels:
         {{- include ".helm.selectorLabels" . | nindent 8 }}
     spec:
-      hostname: {{ .Values.image.hostname }}
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      hostname: {{ .Values.postgres.hostname }}
       serviceAccountName: {{ include ".helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ include ".helm.fullname" . }}
+        - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.image.env }}
+          image: "{{ .Values.postgres.repository }}:{{ .Values.postgres.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.postgres.pullPolicy }}
+          {{- if .Values.postgres.env }}
           env: 
-            {{- toYaml .Values.image.env | nindent 12 }}
+            {{- toYaml .Values.postgres.env | nindent 12 }}
           {{- end }}
-          envFrom:
-            - configMapRef:
-                name: "{{ .Release.Name }}-configmap"
-          args: [ {{.Values.image.args}} ]
+          args: [ {{.Values.postgres.args}} ]
           ports:
             - name: http
-              containerPort: {{ .Values.image.containerPort }}
+              containerPort: {{ .Values.postgres.containerPort }}
               protocol: TCP
+          envFrom:
+            - secretRef:
+                name: "{{ include ".helm.fullname" . }}-secret"
+            - configMapRef:
+                name: "{{ include ".helm.fullname" . }}-configmap"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            # - name: config-vol
-            #   mountPath: /config
-            - name: media-vol
-              mountPath: /media
+          - name: postgres-vol
+            mountPath: {{ .Values.postgres.mountPath }}
+          {{- if .Values.startUp }}
+          - name: config
+            mountPath: /docker-entrypoint-initdb.d
+          {{- end }}
       volumes:
-        - name: config-vol
+        {{- if .Values.storage }}
+        - name: postgres-vol
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
-        - name: media-vol
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-media-pvc
+        {{- end }}
+        {{- if .Values.startUp }}
+        - name: config
+          configMap:
+            name: "{{ include ".helm.fullname" . }}-startup"
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
