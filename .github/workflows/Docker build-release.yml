@@ -31,7 +31,7 @@ jobs:
       matrix:
         image: ['pia-vpn']
     with:
-      image: ${{ matrix.image }}
+      image_name: ${{ matrix.image }}
       # optional
       working_dir: ./docker/${{ matrix.image }}
     secrets: inherit
