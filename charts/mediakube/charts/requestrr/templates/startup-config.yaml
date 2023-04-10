@@ -8,12 +8,12 @@ data:
       "Authentication": {
         "Username": "",
         "Password": "",
-        "PrivateKey": ""
+        "PrivateKey":  {{ uuidv4 | quote }} 
       },
       "ChatClients": {
         "Discord": {
-          "BotToken": "",
-          "ClientId": "",
+          "BotToken": "{{ .Values.config.discordAppId }}",
+          "ClientId": "{{ .Values.config.discordBotToken }}",
           "StatusMessage": "/help",
           "TvShowRoles": [],
           "MovieRoles": [],
@@ -28,11 +28,10 @@ data:
       },
       "DownloadClients": {
         "Ombi": {
-          "Hostname": "{{ .Values.ombi.fullnameOverride }}",
+          "Hostname": "{{ .Values.config.ombi }}",
           "Port": 3579,
           "ApiKey": "${OMBIAPIKEY}",
-          "BaseUrl": "/{{ .Values.ombi.fullnameOverride }}",
-          "BaseUrl": "",
+          "BaseUrl": "/{{ .Values.config.ombi }}",
           "UseSSL": false,
           "Version": "3"
         },
@@ -52,10 +51,10 @@ data:
           "Version": "1"
         },
         "Radarr": {
-          "Hostname": "{{ .Values.radarr.fullnameOverride }}",
+          "Hostname": "{{ .Values.config.radarr }}",
           "Port": 7878,
           "ApiKey": "${RADARRAPIKEY}",
-          "BaseUrl": "/{{ .Values.radarr.fullnameOverride }}",
+          "BaseUrl": "/{{ .Values.config.radarr }}",
           "Categories": [
             {
               "Id": 0,
@@ -72,10 +71,10 @@ data:
           "Version": "3"
         },
         "Sonarr": {
-          "Hostname": "{{ .Values.sonarr.fullnameOverride }}",
+          "Hostname": "{{ .Values.config.sonarr }}",
           "Port": 8989,
           "ApiKey": "${SONARAPIKEY}",
-          "BaseUrl": "/{{ .Values.sonarr.fullnameOverride }}",
+          "BaseUrl": "/{{ .Values.config.sonarr }}",
           "Categories": [
             {
               "Id": 0,

@@ -190,8 +190,13 @@ readarr:
 requestrr:
   hostPath: requestrr
   fullnameOverride: requestrr
+  config:
+    # UrlBase: /requestrr
+    # Port: 4545
+    # ombi: ombi
+    # sonarr: sonarr
+    # radarr: radarr
+    discordAppId: YOUR_DISCORD_APPID
+    discordBotToken: YOUR_DISCORD_BOTTOKEN
   # # optional
   # configPath: requestrr # use only one... host or config
-  # config:
-  #   UrlBase: /requestrr
-  #   Port: 4545

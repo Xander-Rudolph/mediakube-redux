@@ -17,11 +17,15 @@ image:
   #     value: "0"
   #   - name: PUID
   #     value: "0"
-
+  
 config:
   UrlBase: /requestrr
   Port: 4545
-
+  ombi: ombi
+  sonarr: sonarr
+  radarr: radarr
+  ClientId: ""
+  BotToken: ""
 
 service:
   type: ClusterIP
