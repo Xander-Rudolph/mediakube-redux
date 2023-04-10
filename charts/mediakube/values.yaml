@@ -45,7 +45,10 @@ ombi:
   fullnameOverride: ombi
 
 postgresql:
-  configPath: postgres
+  # Use configPath for NFS
+  # configPath: postgres
+  # Use hostPath for local storage
+  hostPath: "YOUR_POSTGRES_LOCAL"
   fullnameOverride: postgres
   password: "YOUR_POSTGRES_PASSWORD"
   

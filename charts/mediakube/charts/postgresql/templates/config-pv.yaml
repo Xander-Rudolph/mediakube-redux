@@ -7,11 +7,17 @@ spec:
   - ReadWriteMany
   capacity:
     storage: {{ .Values.global.configCapacity }}
+  {{- if .Values.configPath }}
   nfs:
     path: {{ .Values.global.configPath }}/{{ .Values.configPath }}
     server: {{ .Values.global.nfs.server }}
   mountOptions:
     - nfsvers=4.1
+  {{- end }}
+  {{- if .Values.hostPath }}
+  hostPath:
+    path: {{ .Values.hostPath }}
+  {{- end }}
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
 
