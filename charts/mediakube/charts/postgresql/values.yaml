@@ -36,6 +36,6 @@ service:
   type: ClusterIP
 
 serviceAccount:
-  create: true
+  create: false
   annotations: {}
   name: "postgres"
