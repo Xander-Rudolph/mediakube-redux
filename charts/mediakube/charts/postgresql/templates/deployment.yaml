@@ -19,7 +19,9 @@ spec:
         {{- include ".helm.selectorLabels" . | nindent 8 }}
     spec:
       hostname: {{ .Values.postgres.hostname }}
+      {{- if .Values.serviceAccount.create -}}
       serviceAccountName: {{ include ".helm.serviceAccountName" . }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
