@@ -1,3 +1,7 @@
+debug:
+  useLocalStore: true
+  mediaCapacity: 100Gi
+
 #################
 # Global config #
 #################
@@ -6,12 +10,17 @@ global:
     server: YOUR_NFS_SERVER
   configPath: YOUR_CONFIG_PATH
   configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by 6 (or the number of services that will be deployed)
+  hostPath: "YOUR_LOCAL_STORAGE" # use this path localized storage
   mediaPath: YOUR_MEDIA_PATH
   mediaCapacity: 15Ti
   # linuxserver common variables
   timezone: Etc/UTC
   PGID: 0
   PUID: 0
+  postgresUser: "postgres"
+  postgresPassword: "YOUR_POSTGRES_PASSWORD"
+  radarrMainDb: radarrmain
+  radarrLogDb: radarrlog
 
 ##################
 # Network config #
@@ -33,46 +42,63 @@ traefik:
   service:
     type: LoadBalancer
 
-##################
-# Service config #
-##################
+########################################
+# Service config - local disk required #
+########################################
+# this section forces use of local storage because of issues with the NFS not allowing startup because it tries to chmod
+ombi:
+  # Use configPath for NFS... permission issues with nfs creation though
+  # configPath: ombi
+  # Use hostPath for local storage
+  hostPath: ombi
+  fullnameOverride: ombi
+
+postgresql:
+  # Use configPath for NFS... permission issues with nfs creation though
+  # configPath: postgres
+  # Use hostPath for local storage
+  hostPath: postgres
+  fullnameOverride: postgres
+
+#######################################
+# Service config - NFS mount optional #
+#######################################
 lidarr:
-  configPath: lidarr
+  # configPath: lidarr
+  hostPath: lidarr
   fullnameOverride: lidarr
 
-overseerr:
-  configPath: overseerr
-  fullnameOverride: overseerr
-
 prowlarr:
-  configPath: prowlarr
+  # configPath: prowlarr
+  hostPath: prowlarr
   fullnameOverride: prowlarr
 
 radarr:
-  configPath: radarr
+  # configPath: radarr
+  hostPath: radarr
   fullnameOverride: radarr
 
 readarr:
-  configPath: readarr
+  # configPath: readarr
+  hostPath: readarr
   fullnameOverride: readarr
 
 requestrr:
-  configPath: requestrr
+  # configPath: requestrr
+  hostPath: requestrr
   fullnameOverride: requestrr
 
 sonarr:
-  configPath: sonarr
+  # configPath: sonarr
+  hostPath: sonarr
   fullnameOverride: sonarr
 
 transmission:
-  configPath: transmission
+  # configPath: transmission
+  hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
   password: YOUR_PASSWORD
   vpn:
     username: YOUR_PIA_USERNAME
     password: YOUR_PIA_PASSWORD
-
-ombi:
-  configPath: ombi
-  fullnameOverride: ombi

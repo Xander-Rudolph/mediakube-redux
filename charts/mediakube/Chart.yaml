@@ -18,6 +18,9 @@ dependencies:
     # TODO: need to fix the ingress
     version: "^0"
     repository: "file://./charts/ombi"
+  - name: postgresql
+    version: "^0"
+    repository: "file://./charts/postgresql"
   - name: prowlarr
     version: "^0"
     repository: "file://./charts/prowlarr"
