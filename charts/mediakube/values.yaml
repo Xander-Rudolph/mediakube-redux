@@ -148,10 +148,10 @@ prowlarr:
 # Service config - Still testing #
 ##################################
 lidarr:
-  hostPath: lidarr # use only one... host or config
+  configPath: lidarr # use only one... host or config
   fullnameOverride: lidarr
   # # optional
-  # configPath: lidarr # use only one... host or config
+  # hostPath: lidarr # use only one... host or config
   # config:
   #   UrlBase: /lidarr
   #   LogLevel: info
@@ -168,10 +168,10 @@ lidarr:
   #   InstanceName: Lidarr
 
 readarr:
-  hostPath: readarr # use only one... host or config
+  configPath: readarr # use only one... host or config
   fullnameOverride: readarr
   # # optional
-  # configPath: readarr # use only one... host or config
+  # hostPath: readarr # use only one... host or config
   # config:
   #   UrlBase: /readarr
   #   LogLevel: info
@@ -188,15 +188,16 @@ readarr:
   #   InstanceName: Readarr
 
 requestrr:
-  hostPath: requestrr
+  hostPath: requestrr # use only one... host or config
   fullnameOverride: requestrr
   config:
+    discordAppId: YOUR_DISCORD_APPID
+    discordBotToken: YOUR_DISCORD_BOTTOKEN
+    # # optional
     # UrlBase: /requestrr
     # Port: 4545
     # ombi: ombi
     # sonarr: sonarr
     # radarr: radarr
-    discordAppId: YOUR_DISCORD_APPID
-    discordBotToken: YOUR_DISCORD_BOTTOKEN
   # # optional
   # configPath: requestrr # use only one... host or config
