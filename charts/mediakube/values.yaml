@@ -22,7 +22,6 @@ global:
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
 
-
 ##################
 # Network config #
 ##################
@@ -62,7 +61,7 @@ postgresql:
   fullnameOverride: postgres
 
 #######################################
-# Service config - NFS mount required #
+# Service config - NFS mount optional #
 #######################################
 lidarr:
   # configPath: lidarr

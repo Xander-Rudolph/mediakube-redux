@@ -8,6 +8,7 @@ data:
 {{ .Values.startUp.fileContent | indent 4 }}
   {{ else }}
   configdata.sql: |
+    -- radarr
     SELECT 'CREATE DATABASE {{ .Values.global.radarrMainDb }} '
     'WITH '
     'ENCODING = ''UTF8'' '

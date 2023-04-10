@@ -1,3 +1,4 @@
+# https://wiki.servarr.com/radarr/postgres-setup
 apiVersion: v1
 kind: ConfigMap
 metadata:
