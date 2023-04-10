@@ -30,8 +30,8 @@ $subdomains= ""
 $token= ""
 
 # transmission
-$username= "admin"
-$password= "Rud01ph1!"
+$username= ""
+$password= ""
 
 # transmission.vpn
 $vpn_username= ""
