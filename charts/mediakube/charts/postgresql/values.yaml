@@ -17,25 +17,25 @@ startUp:
   scriptContent: |
     echo "Nothing to run" > /var/lib/postgresql/data/thiswillbeinthePV.txt
   sqlFileContent: |
-    SELECT 'CREATE DATABASE radarr-main '
+    SELECT 'CREATE DATABASE radarrmain '
     'WITH '
     'ENCODING = ''UTF8'' '
     'CONNECTION LIMIT = -1 '
     'IS_TEMPLATE = False'
-    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarr-main')\gexec
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarrmain')\gexec
     ;
-    SELECT 'CREATE DATABASE radarr-log '
+    SELECT 'CREATE DATABASE radarrlog '
     'WITH '
     'ENCODING = ''UTF8'' '
     'CONNECTION LIMIT = -1 '
     'IS_TEMPLATE = False'
-    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarr-log')\gexec
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'radarrlog')\gexec
     ;
 
 service:
   type: ClusterIP
 
 serviceAccount:
-  create: false
+  create: true
   annotations: {}
   name: "postgres"
