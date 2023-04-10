@@ -15,7 +15,7 @@ postgres:
 
 startUp:
   scriptContent: |
-      echo "Nothing to run" > /var/lib/postgresql/data/thiswillbeinthePV.txt
+    echo "Nothing to run" > /var/lib/postgresql/data/thiswillbeinthePV.txt
   sqlFileContent: |
     SELECT 'CREATE DATABASE radarr-main '
     'WITH '

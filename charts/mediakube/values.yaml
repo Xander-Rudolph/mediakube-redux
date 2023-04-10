@@ -44,9 +44,11 @@ ombi:
   configPath: ombi
   fullnameOverride: ombi
 
-postgres:
+postgresql:
   configPath: postgres
+  fullnameOverride: postgres
   password: "YOUR_POSTGRES_PASSWORD"
+
 
 prowlarr:
   configPath: prowlarr

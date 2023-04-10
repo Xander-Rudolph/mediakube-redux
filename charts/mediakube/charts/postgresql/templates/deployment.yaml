@@ -28,10 +28,8 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.postgres.repository }}:{{ .Values.postgres.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.postgres.pullPolicy }}
-          {{- if .Values.postgres.env }}
           env: 
             {{- toYaml .Values.postgres.env | nindent 12 }}
-          {{- end }}
           args: [ {{.Values.postgres.args}} ]
           ports:
             - name: http
@@ -48,17 +46,15 @@ spec:
           - name: postgres-vol
             mountPath: {{ .Values.postgres.mountPath }}
           {{- if .Values.startUp }}
-          - name: config
+          - name: file-config
             mountPath: /docker-entrypoint-initdb.d
           {{- end }}
       volumes:
-        {{- if .Values.storage }}
         - name: postgres-vol
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
-        {{- end }}
         {{- if .Values.startUp }}
-        - name: config
+        - name: file-config
           configMap:
             name: "{{ include ".helm.fullname" . }}-startup"
         {{- end }}

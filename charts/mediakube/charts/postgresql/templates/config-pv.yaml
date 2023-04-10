@@ -1,9 +1,6 @@
-{{- if (((.Values).global).configPath) }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
   name: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pv
 spec:
   accessModes:
@@ -17,12 +14,11 @@ spec:
     - nfsvers=4.1
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  finalizers:
-  - kubernetes.io/pvc-protection
   name: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
 spec:
   accessModes:
@@ -34,4 +30,3 @@ spec:
   storageClassName: ""
   volumeMode: Filesystem
   volumeName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pv
-{{- end }}
