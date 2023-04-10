@@ -13,9 +13,13 @@ postgres:
     - name: PGDATA
       value: /var/lib/postgresql/data/pgdata
 
-# startUp:
-#   scriptContent: |
-#     echo "Nothing to run" > /var/lib/postgresql/data/thiswillbeinthePV.txt
+startUp:
+  scriptContent: |
+    echo_time() {
+        date +"%R $*"
+    }
+    echo_time "Last Update" > /var/lib/postgresql/data/lastUpdated.txt
+    
 #   fileContent: |
 #     SELECT 'CREATE DATABASE radarrmain '
 #     'WITH '

@@ -6,10 +6,10 @@ data:
   config.xml: |
     <Config>
       <UrlBase>/radarr</UrlBase>
-      <PostgresUser>${{ .Values.global.postgresUser }}</PostgresUser> 
-      <PostgresPassword>${{ .Values.global.postgresPassword }}</PostgresPassword>
+      <PostgresUser>{{ .Values.global.postgresUser }}</PostgresUser> 
+      <PostgresPassword>{{ .Values.global.postgresPassword }}</PostgresPassword>
       <PostgresPort>5432</PostgresPort>    
       <PostgresHost>postgres</PostgresHost>      
-      <PostgresMainDb>${{ .Values.global.radarrMainDb }}</PostgresMainDb>
-      <PostgresLogDb>${{ .Values.global.radarrLogDb }}</PostgresLogDb>
+      <PostgresMainDb>{{ .Values.global.radarrMainDb }}</PostgresMainDb>
+      <PostgresLogDb>{{ .Values.global.radarrLogDb }}</PostgresLogDb>
     </Config>
