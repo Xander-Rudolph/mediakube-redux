@@ -6,11 +6,23 @@ metadata:
 data:
   config.xml: |
     <Config>
-      <UrlBase>/radarr</UrlBase>
+      <UrlBase>{{ .Values.config.UrlBase }}</UrlBase>
       <PostgresUser>{{ .Values.global.postgresUser }}</PostgresUser> 
       <PostgresPassword>{{ .Values.global.postgresPassword }}</PostgresPassword>
-      <PostgresPort>5432</PostgresPort>    
-      <PostgresHost>postgres</PostgresHost>      
+      <PostgresPort>{{ .Values.config.PostgresPort }}</PostgresPort>    
+      <PostgresHost>{{ .Values.config.PostgresHost }}</PostgresHost>      
       <PostgresMainDb>{{ .Values.global.radarrMainDb }}</PostgresMainDb>
       <PostgresLogDb>{{ .Values.global.radarrLogDb }}</PostgresLogDb>
+      <LogLevel>{{ .Values.config.LogLevel }}</LogLevel>      
+      <UpdateMechanism>{{ .Values.config.UpdateMechanism }}</UpdateMechanism>      
+      <BindAddress>{{ .Values.config.BindAddress }}</BindAddress>      
+      <Port>{{ .Values.config.Port }}</Port>      
+      <SslPort>{{ .Values.config.SslPort }}</SslPort>      
+      <EnableSsl>{{ .Values.config.EnableSsl }}</EnableSsl>      
+      <LaunchBrowser>{{ .Values.config.LaunchBrowser }}</LaunchBrowser>      
+      <AuthenticationMethod>{{ .Values.config.AuthenticationMethod }}</AuthenticationMethod>      
+      <Branch>{{ .Values.config.Branch }}</Branch>      
+      <SslCertPath>{{ .Values.config.SslCertPath }}</SslCertPath>      
+      <SslCertPassword>{{ .Values.config.SslCertPassword }}</SslCertPassword>      
+      <InstanceName>{{ .Values.config.InstanceName }}</InstanceName>      
     </Config>

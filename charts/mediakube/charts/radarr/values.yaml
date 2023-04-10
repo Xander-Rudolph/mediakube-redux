@@ -12,6 +12,23 @@ image:
   #   - name: PUID
   #     value: "0"
 
+config:
+  UrlBase: /radarr
+  PostgresPort: 5432
+  PostgresHost: postgres
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 7878
+  SslPort: 9898
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: master
+  SslCertPath: 
+  SslCertPassword: 
+  InstanceName: Radarr
+
 service:
   type: ClusterIP
 
