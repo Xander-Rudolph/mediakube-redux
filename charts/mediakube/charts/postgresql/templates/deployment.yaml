@@ -47,19 +47,15 @@ spec:
           volumeMounts:
           - name: postgres-vol
             mountPath: {{ .Values.postgres.mountPath }}
-          {{- if .Values.startUp }}
           - name: file-config
             mountPath: /docker-entrypoint-initdb.d
-          {{- end }}
       volumes:
         - name: postgres-vol
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
-        {{- if .Values.startUp }}
         - name: file-config
           configMap:
             name: "{{ include ".helm.fullname" . }}-startup"
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

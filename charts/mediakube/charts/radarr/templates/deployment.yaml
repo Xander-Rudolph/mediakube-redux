@@ -50,6 +50,8 @@ spec:
               mountPath: /config
             - name: media-vol
               mountPath: /media
+            - name: file-config
+              mountPath: /config/config.xml
       volumes:
         - name: config-vol
           persistentVolumeClaim:
@@ -57,6 +59,9 @@ spec:
         - name: media-vol
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-media-pvc
+        - name: file-config
+          configMap:
+            name: "{{ include ".helm.fullname" . }}-startup"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -6,12 +6,18 @@ global:
     server: YOUR_NFS_SERVER
   configPath: YOUR_CONFIG_PATH
   configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by 6 (or the number of services that will be deployed)
+  hostPath: "YOUR_LOCAL_STORAGE" # use this path localized storage
   mediaPath: YOUR_MEDIA_PATH
   mediaCapacity: 15Ti
   # linuxserver common variables
   timezone: Etc/UTC
   PGID: 0
   PUID: 0
+  postgresUser: "postgres"
+  postgresPassword: "YOUR_POSTGRES_PASSWORD"
+  radarrMainDb: radarrmain
+  radarrLogDb: radarrlog
+
 
 ##################
 # Network config #
@@ -41,17 +47,19 @@ lidarr:
   fullnameOverride: lidarr
 
 ombi:
-  configPath: ombi
+  # Use configPath for NFS... permission issues with nfs creation though
+  # configPath: ombi
+  # Use hostPath for local storage
+  hostPath: ombi
   fullnameOverride: ombi
 
 postgresql:
-  # Use configPath for NFS
+  # Use configPath for NFS... permission issues with nfs creation though
   # configPath: postgres
   # Use hostPath for local storage
-  hostPath: "YOUR_POSTGRES_LOCAL"
+  hostPath: postgres
   fullnameOverride: postgres
-  password: "YOUR_POSTGRES_PASSWORD"
-  
+
 prowlarr:
   configPath: prowlarr
   fullnameOverride: prowlarr

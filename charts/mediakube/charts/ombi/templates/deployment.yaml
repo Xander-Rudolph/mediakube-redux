@@ -46,8 +46,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            # - name: config-vol
-            #   mountPath: /config
+            - name: config-vol
+              mountPath: /config
             - name: media-vol
               mountPath: /media
       volumes:

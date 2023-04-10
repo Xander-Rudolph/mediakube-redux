@@ -4,9 +4,25 @@ kind: ConfigMap
 metadata:
   name: "{{ include ".helm.fullname" . }}-startup"
 data:
-  {{- if (hasKey .Values.startUp "sqlFileContent") }}
+  {{- if (hasKey .Values.startUp "fileContent") }}
   configdata.sql: |
-{{ .Values.startUp.sqlFileContent | indent 4 }}
+{{ .Values.startUp.fileContent | indent 4 }}
+  {{ else }}
+  configdata.sql: |
+    SELECT 'CREATE DATABASE ${{ .Values.radarrMain }} '
+    'WITH '
+    'ENCODING = ''UTF8'' '
+    'CONNECTION LIMIT = -1 '
+    'IS_TEMPLATE = False'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '${{ .Values.radarrMain }}')\gexec
+    ;
+    SELECT 'CREATE DATABASE ${{ .Values.radarrLog }} '
+    'WITH '
+    'ENCODING = ''UTF8'' '
+    'CONNECTION LIMIT = -1 '
+    'IS_TEMPLATE = False'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '${{ .Values.radarrLog }}')\gexec
+    ;
   {{- end }}
   {{- if (hasKey .Values.startUp "scriptContent") }}
   configdata.sh: |
