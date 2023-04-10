@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include ".helm.fullname" . }}-startup"
+data:
+  config.xml: |
+    <Config>
+      <UrlBase>{{ .Values.config.UrlBase }}</UrlBase>
+      <LogLevel>{{ .Values.config.LogLevel }}</LogLevel>      
+      <UpdateMechanism>{{ .Values.config.UpdateMechanism }}</UpdateMechanism>      
+      <BindAddress>{{ .Values.config.BindAddress }}</BindAddress>      
+      <Port>{{ .Values.config.Port }}</Port>      
+      <SslPort>{{ .Values.config.SslPort }}</SslPort>      
+      <EnableSsl>{{ .Values.config.EnableSsl }}</EnableSsl>      
+      <LaunchBrowser>{{ .Values.config.LaunchBrowser }}</LaunchBrowser>      
+      <AuthenticationMethod>{{ .Values.config.AuthenticationMethod }}</AuthenticationMethod>      
+      <Branch>{{ .Values.config.Branch }}</Branch>      
+      <SslCertPath>{{ .Values.config.SslCertPath }}</SslCertPath>      
+      <SslCertPassword>{{ .Values.config.SslCertPassword }}</SslCertPassword>      
+      <InstanceName>{{ .Values.config.InstanceName }}</InstanceName>      
+    </Config>

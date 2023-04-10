@@ -1,0 +1,22 @@
+# https://wiki.servarr.com/radarr/postgres-setup
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include ".helm.fullname" . }}-startup"
+data:
+  config.xml: |
+    <Config>
+      <UrlBase>{{ .Values.config.UrlBase }}</UrlBase>
+      <LogLevel>{{ .Values.config.LogLevel }}</LogLevel>      
+      <UpdateMechanism>{{ .Values.config.UpdateMechanism }}</UpdateMechanism>      
+      <BindAddress>{{ .Values.config.BindAddress }}</BindAddress>      
+      <Port>{{ .Values.config.Port }}</Port>      
+      <SslPort>{{ .Values.config.SslPort }}</SslPort>      
+      <EnableSsl>{{ .Values.config.EnableSsl }}</EnableSsl>      
+      <LaunchBrowser>{{ .Values.config.LaunchBrowser }}</LaunchBrowser>      
+      <AuthenticationMethod>{{ .Values.config.AuthenticationMethod }}</AuthenticationMethod>      
+      <Branch>{{ .Values.config.Branch }}</Branch>      
+      <SslCertHash>{{ .Values.config.SslCertHash }}</SslCertHash>      
+      <InstanceName>{{ .Values.config.InstanceName }}</InstanceName>      
+      <SyslogPort>{{ .Values.config.SyslogPort }}</SyslogPort>
+    </Config>

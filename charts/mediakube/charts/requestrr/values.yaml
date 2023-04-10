@@ -4,13 +4,28 @@ image:
   pullPolicy: Always
   containerPort: 4545
   hostname: requestrr
-  # env:
+  env:
+    - name: SONARAPIKEY
+      value: ""
+    - name: RADARRAPIKEY
+      value: ""
+    - name: OMBIAPIKEY
+      value: ""
   #   - name: TZ
   #     value: UTC
   #   - name: PGID
   #     value: "0"
   #   - name: PUID
   #     value: "0"
+  
+config:
+  UrlBase: /requestrr
+  Port: 4545
+  ombi: ombi
+  sonarr: sonarr
+  radarr: radarr
+  ClientId: ""
+  BotToken: ""
 
 service:
   type: ClusterIP
