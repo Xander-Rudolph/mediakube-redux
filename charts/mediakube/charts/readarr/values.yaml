@@ -12,6 +12,21 @@ image:
   #   - name: PUID
   #     value: "0"
 
+config:
+  UrlBase: /readarr
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 8787
+  SslPort: 6868
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: develop
+  SslCertPath: 
+  SslCertPassword: 
+  InstanceName: Readarr
+
 service:
   type: ClusterIP
 

@@ -12,6 +12,21 @@ image:
   #   - name: PUID
   #     value: "0"
 
+config:
+  UrlBase: /lidarr
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 8686
+  SslPort: 6868
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: master
+  SslCertPath: 
+  SslCertPassword: 
+  InstanceName: Lidarr
+
 service:
   type: ClusterIP
 

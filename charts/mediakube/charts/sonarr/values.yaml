@@ -14,8 +14,6 @@ image:
 
 config:
   UrlBase: /sonarr
-  PostgresPort: 5432
-  PostgresHost: postgres
   LogLevel: info
   UpdateMechanism: Docker
   BindAddress: "*"

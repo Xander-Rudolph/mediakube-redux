@@ -12,6 +12,21 @@ image:
   #   - name: PUID
   #     value: "0"
 
+config:
+  UrlBase: /prowlarr
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 9696
+  SslPort: 6969
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: master
+  SslCertPath: 
+  SslCertPassword: 
+  InstanceName: Prowlarr
+
 service:
   type: ClusterIP
 

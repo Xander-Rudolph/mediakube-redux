@@ -1,22 +1,28 @@
 debug:
-  useLocalStore: true
+  # this will only set media to the local storage
+  useLocalStore: false
   mediaCapacity: 100Gi
 
 #################
 # Global config #
 #################
 global:
+  # This section is needed to use NFS for storage
   nfs:
     server: YOUR_NFS_SERVER
+  # nfs config path
   configPath: YOUR_CONFIG_PATH
-  configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by 6 (or the number of services that will be deployed)
+  # local storage path such as /mnt/d/kubestore
   hostPath: "YOUR_LOCAL_STORAGE" # use this path localized storage
+  configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by the number of services that will be deployed
+  # media NFS path
   mediaPath: YOUR_MEDIA_PATH
-  mediaCapacity: 15Ti
+  mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
   # linuxserver common variables
   timezone: Etc/UTC
   PGID: 0
   PUID: 0
+  # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
   radarrMainDb: radarrmain
@@ -83,35 +89,14 @@ sonarr:
   #   InstanceName: Sonarr
   #   SyslogPort: 514
 
-lidarr:
-  # configPath: lidarr
-  hostPath: lidarr
-  fullnameOverride: lidarr
-
-prowlarr:
-  # configPath: prowlarr
-  hostPath: prowlarr
-  fullnameOverride: prowlarr
-
-readarr:
-  # configPath: readarr
-  hostPath: readarr
-  fullnameOverride: readarr
-
-requestrr:
-  # configPath: requestrr
-  hostPath: requestrr
-  fullnameOverride: requestrr
-
-
 #######################################
-# Service config - NFS mount optional #
+# Service config - NFS optional mount #
 #######################################
 radarr:
-  configPath: radarr
-  # hostPath: radarr
+  configPath: radarr # use only one... host or config
   fullnameOverride: radarr
   # # optional
+  # hostPath: radarr # use only one... host or config
   # config:
   #   UrlBase: /radarr
   #   PostgresPort: 5432
@@ -138,3 +123,75 @@ transmission:
   vpn:
     username: YOUR_PIA_USERNAME
     password: YOUR_PIA_PASSWORD
+
+prowlarr:
+  configPath: prowlarr # use only one... host or config
+  fullnameOverride: prowlarr
+  # # optional
+  # hostPath: prowlarr # use only one... host or config
+  # config:
+  #   UrlBase: /prowlarr
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 9696
+  #   SslPort: 6969
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: master
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: Prowlarr
+
+##################################
+# Service config - Still testing #
+##################################
+lidarr:
+  hostPath: lidarr # use only one... host or config
+  fullnameOverride: lidarr
+  # # optional
+  # configPath: lidarr # use only one... host or config
+  # config:
+  #   UrlBase: /lidarr
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 8686
+  #   SslPort: 6868
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: master
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: Lidarr
+
+readarr:
+  hostPath: readarr # use only one... host or config
+  fullnameOverride: readarr
+  # # optional
+  # configPath: readarr # use only one... host or config
+  # config:
+  #   UrlBase: /readarr
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 8787
+  #   SslPort: 6868
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: develop
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: Readarr
+
+requestrr:
+  hostPath: requestrr
+  fullnameOverride: requestrr
+  # # optional
+  # configPath: requestrr # use only one... host or config
+  # config:
+  #   UrlBase: /requestrr
+  #   Port: 4545

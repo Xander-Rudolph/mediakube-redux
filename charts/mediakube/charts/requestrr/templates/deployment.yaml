@@ -25,6 +25,15 @@ spec:
       serviceAccountName: {{ include ".helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: set-config-xml
+        image: busybox:latest
+        volumeMounts:
+          - name: config-vol
+            mountPath: /config
+          - name: file-config
+            mountPath: /preload        
+        command: ['sh', '-c', "cat /preload/settings.json > /config/settings.json"]
       containers:
         - name: {{ include ".helm.fullname" . }}
           securityContext:
@@ -52,6 +61,12 @@ spec:
         - name: config-vol
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
+        - name: file-config
+          configMap:
+            name: "{{ include ".helm.fullname" . }}-startup"
+            items:
+            - key: settings.json
+              path: settings.json
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

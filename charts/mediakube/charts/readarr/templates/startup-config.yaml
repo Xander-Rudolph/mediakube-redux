@@ -1,4 +1,3 @@
-# https://wiki.servarr.com/radarr/postgres-setup
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -16,7 +15,7 @@ data:
       <LaunchBrowser>{{ .Values.config.LaunchBrowser }}</LaunchBrowser>      
       <AuthenticationMethod>{{ .Values.config.AuthenticationMethod }}</AuthenticationMethod>      
       <Branch>{{ .Values.config.Branch }}</Branch>      
-      <SslCertHash>{{ .Values.config.SslCertHash }}</SslCertHash>      
+      <SslCertPath>{{ .Values.config.SslCertPath }}</SslCertPath>      
+      <SslCertPassword>{{ .Values.config.SslCertPassword }}</SslCertPassword>      
       <InstanceName>{{ .Values.config.InstanceName }}</InstanceName>      
-      <SyslogPort>{{ .Values.config.SyslogPort }}</SyslogPort>
     </Config>
