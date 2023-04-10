@@ -1,17 +1,25 @@
+# Things to know
 Thanks to the folks over at linuxserver.io for all these awesome images
 https://docs.linuxserver.io/
 
-# Things to know
 ## Networking and VPN
-This cluster setup uses PIA VPN as its vpn provider and it only links to the torrent image. See the pia-vpn image for additional details about the vpn setup
+This cluster setup uses PIA VPN as its vpn provider and it only links to the torrent image. Currently the VPN sidecar is disabled until [#20](https://github.com/Xander-Rudolph/mediakube-redux/issues/20) is resolved.
 
-The networking and routing for this cluster is managed via Traefik and the various *rr services are not exposed. The torrent agent and ombi are the only pieces that are routed at this time.
+The networking and routing for this cluster is managed via Traefik and the various *arr services are exposed. 
 
 ## Exposed paths
+`/dashboard`
+`/dashboard/`
 `/downloads`
 `/downloads/`
 `/transmission`
-`/ombi/`
+`/ombi`
+`/sonarr`
+`/radarr`
+`/lidarr`
+`/readarr`
+`/prowlarr`
+`/requestrr`
 
 ## Traefik Dashboard
 The following block controls the traefik dashboard:
@@ -39,79 +47,12 @@ Localization for specific timezones will automatically apply to all the linuxser
 `PUID: 0`
 this is the `root` user and `root` group in linux so if the NFS has security configurations, this should be set appropriately
 
-# Example usage
-The following sections will outline how to run the script
+`postgresUser: "postgres"`
+this is the default user for the postgres pod
 
-## linux/mac
-NOTE: ensure that you are in the mediakube folder before execution
-```
-export filename=./values.yaml
-# update these values to set the helm chart values file
-# nfs
-export server= "127.0.0.1"
-export config= "/config"
-export media= "/media"
+`postgresPassword: "YOUR_POSTGRES_PASSWORD"`
+this needs to be update unless you want YOUR_POSTGRES_PASSWORD as a password
 
-# duckdns
-export subdomains= "subdomain1,subdomain2"
-export token= "token"
-
-# transmission
-export username= "admin"
-export password= "Password"
-
-# transmission.vpn
-export vpn_username= "p000000"
-export vpn_password= "YoUrSeCuRePaSsWoRd"
-
-sed -i "s/YOUR_NFS_SERVER/$server/g" $filename
-sed -i "s/YOUR_CONFIG_PATH/$config/g" $filename
-sed -i "s/YOUR_MEDIA_PATH/$media/g" $filename
-sed -i "s/YOUR_SUBDOMAINS/$subdomains/g" $filename
-sed -i "s/YOUR_DNS_TOKEN/$token/g" $filename
-sed -i "s/YOUR_USERNAME/$username/g" $filename
-sed -i "s/YOUR_PASSWORD/$password/g" $filename
-sed -i "s/YOUR_PIA_USERNAME/$vpn_username/g" $filename
-sed -i "s/YOUR_PIA_PASSWORD/$vpn_password/g" $filename
-helm upgrade -i mediakube .
-```
-
-## Windows (powershell)
-NOTE: this powershell script should be located in the mediakube chart folder root
-```
-pushd $PSScriptRoot
-$filename="./values.yaml"
-# update these values to set the helm chart values file
-# nfs
-$server= "127.0.0.1"
-$config= "/config"
-$media= "/media"
-
-# duckdns
-$subdomains= "subdomain1,subdomain2"
-$token= "token"
-
-# transmission
-$username= "admin"
-$password= "Password"
-
-# transmission.vpn
-$vpn_username= "p000000"
-$vpn_password= "YoUrSeCuRePaSsWoRd"
-
-(Get-Content $filename).Replace('YOUR_NFS_SERVER',$server) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_CONFIG_PATH',$config) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_MEDIA_PATH',$media) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_SUBDOMAINS',$subdomains) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_DNS_TOKEN',$token) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_USERNAME',$username) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_PASSWORD',$password) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_PIA_USERNAME',$vpn_username) | Set-Content $filename
-(Get-Content $filename).Replace('YOUR_PIA_PASSWORD',$vpn_password) | Set-Content $filename
-if(-not (test-path Chart.lock))
-{
-    helm dependency build
-}
-helm upgrade -i mediakube .
-popd
-```
+`radarrMainDb: radarrmain`
+`radarrLogDb: radarrlog`
+These two the names of the postgres dbs for radarr.. changing this might break stuff so search for the strings radarrmain, radarrlog before modifying it.

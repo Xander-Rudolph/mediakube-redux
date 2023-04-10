@@ -13,7 +13,7 @@ If you are using this repo, there are a few things to note. Other than the VPN i
 Depending on the platform, either a bash or powershell script is recommended. The default values files does not have real values but instead a list of variables that need to be subbed in. This is an example in powershell but something simliar will work in bash:
 
 ```
-pushd $PSScriptRoot
+pushd $PSScriptRoot # this should be the charts/mediakube directory so make sure to put this script there
 $filename="./values.yaml"
 # update these values to set the helm chart values file
 # nfs
