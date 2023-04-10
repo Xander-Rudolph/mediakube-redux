@@ -1,3 +1,7 @@
+debug:
+  useLocalStore: true
+  mediaCapacity: 100Gi
+
 #################
 # Global config #
 #################
@@ -39,13 +43,10 @@ traefik:
   service:
     type: LoadBalancer
 
-##################
-# Service config #
-##################
-lidarr:
-  configPath: lidarr
-  fullnameOverride: lidarr
-
+########################################
+# Service config - local disk required #
+########################################
+# this section forces use of local storage because of issues with the NFS not allowing startup because it tries to chmod
 ombi:
   # Use configPath for NFS... permission issues with nfs creation though
   # configPath: ombi
@@ -60,28 +61,42 @@ postgresql:
   hostPath: postgres
   fullnameOverride: postgres
 
+#######################################
+# Service config - NFS mount required #
+#######################################
+lidarr:
+  # configPath: lidarr
+  hostPath: lidarr
+  fullnameOverride: lidarr
+
 prowlarr:
-  configPath: prowlarr
+  # configPath: prowlarr
+  hostPath: prowlarr
   fullnameOverride: prowlarr
 
 radarr:
-  configPath: radarr
+  # configPath: radarr
+  hostPath: radarr
   fullnameOverride: radarr
 
 readarr:
-  configPath: readarr
+  # configPath: readarr
+  hostPath: readarr
   fullnameOverride: readarr
 
 requestrr:
-  configPath: requestrr
+  # configPath: requestrr
+  hostPath: requestrr
   fullnameOverride: requestrr
 
 sonarr:
-  configPath: sonarr
+  # configPath: sonarr
+  hostPath: sonarr
   fullnameOverride: sonarr
 
 transmission:
-  configPath: transmission
+  # configPath: transmission
+  hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
   password: YOUR_PASSWORD
