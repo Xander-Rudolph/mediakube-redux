@@ -12,6 +12,23 @@ image:
   #   - name: PUID
   #     value: "0"
 
+config:
+  UrlBase: /sonarr
+  PostgresPort: 5432
+  PostgresHost: postgres
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 8989
+  SslPort: 9898
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: main
+  SslCertHash: 
+  InstanceName: Sonarr
+  SyslogPort: 514
+
 service:
   type: ClusterIP
 

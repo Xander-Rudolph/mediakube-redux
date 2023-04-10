@@ -60,9 +60,29 @@ postgresql:
   hostPath: postgres
   fullnameOverride: postgres
 
-#######################################
-# Service config - NFS mount optional #
-#######################################
+sonarr:
+  # Use configPath for NFS... latency with sqlite
+  # configPath: sonarr
+  hostPath: sonarr
+  fullnameOverride: sonarr
+  # # optional
+  # config:
+  #   UrlBase: /sonarr
+  #   PostgresPort: 5432
+  #   PostgresHost: postgres
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 8989
+  #   SslPort: 9898
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: main
+  #   SslCertHash: 
+  #   InstanceName: Sonarr
+  #   SyslogPort: 514
+
 lidarr:
   # configPath: lidarr
   hostPath: lidarr
@@ -72,11 +92,6 @@ prowlarr:
   # configPath: prowlarr
   hostPath: prowlarr
   fullnameOverride: prowlarr
-
-radarr:
-  # configPath: radarr
-  hostPath: radarr
-  fullnameOverride: radarr
 
 readarr:
   # configPath: readarr
@@ -88,14 +103,35 @@ requestrr:
   hostPath: requestrr
   fullnameOverride: requestrr
 
-sonarr:
-  # configPath: sonarr
-  hostPath: sonarr
-  fullnameOverride: sonarr
+
+#######################################
+# Service config - NFS mount optional #
+#######################################
+radarr:
+  configPath: radarr
+  # hostPath: radarr
+  fullnameOverride: radarr
+  # # optional
+  # config:
+  #   UrlBase: /radarr
+  #   PostgresPort: 5432
+  #   PostgresHost: postgres
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 7878
+  #   SslPort: 9898
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: master
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: Radarr
 
 transmission:
-  # configPath: transmission
-  hostPath: transmission
+  configPath: transmission
+  # hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
   password: YOUR_PASSWORD
