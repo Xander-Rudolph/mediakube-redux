@@ -15,7 +15,6 @@ dependencies:
     version: "^0"
     repository: "file://./charts/lidarr"
   - name: ombi
-    # TODO: need to fix the ingress
     version: "^0"
     repository: "file://./charts/ombi"
   - name: postgresql
@@ -30,18 +29,12 @@ dependencies:
   - name: readarr
     version: "^0"
     repository: "file://./charts/readarr"
-  - name: requestrr
-    version: "^0"
-    repository: "file://./charts/requestrr"
+  # - name: requestrr
+  #   version: "^0"
+  #   repository: "file://./charts/requestrr"
   - name: sonarr
     version: "^0"
     repository: "file://./charts/sonarr"
-  - name: transmission
-    version: "^0"
-    repository: "file://./charts/transmission"
-  # - name: jackett
+  # - name: transmission
   #   version: "^0"
-  #   repository: "file://./charts/jackett"
-  # - name: lazylibrarian
-  #   version: "^0"
-  #   repository: "file://./charts/lazylibrarian"
+  #   repository: "file://./charts/transmission"
