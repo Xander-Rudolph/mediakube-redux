@@ -1,8 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
   name: {{ .Release.Name }}-media-pv
 spec:
   accessModes:
@@ -31,8 +29,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  finalizers:
-  - kubernetes.io/pvc-protection
   name: {{ .Release.Name }}-media-pvc
 spec:
   accessModes:
