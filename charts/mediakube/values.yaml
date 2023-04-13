@@ -27,6 +27,10 @@ global:
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
+  radarrKey: YOUR_RADARR_KEY
+  sonarrKey: YOUR_SONARR_KEY
+  bazarrDb: bazarr
+
 
 ##################
 # Network config #
@@ -186,6 +190,26 @@ readarr:
   #   SslCertPath: 
   #   SslCertPassword: 
   #   InstanceName: Readarr
+
+bazarr:
+  configPath: bazarr # use only one... host or config
+  fullnameOverride: bazarr
+  # # optional
+  # hostPath: bazarr # use only one... host or config
+  # config:
+  #   UrlBase: /bazarr
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 6767
+  #   SslPort: 6868
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: develop
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: bazarr
 
 requestrr:
   hostPath: requestrr # use only one... host or config

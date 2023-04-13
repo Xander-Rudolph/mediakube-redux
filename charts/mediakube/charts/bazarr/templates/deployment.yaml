@@ -33,7 +33,7 @@ spec:
             mountPath: /config
           - name: file-config
             mountPath: /preload        
-        command: ['sh', '-c', "if [ ! -f /config/config.yml ]; then cat /preload/config.yml > /config/config.yml; fi"]
+        command: ['sh', '-c', "if [ ! -f /config/config/config.ini ]; then mkdir -p /config/config && cat /preload/config.ini > /config/config/config.ini; fi"]
       containers:
         - name: {{ include ".helm.fullname" . }}
           securityContext:
@@ -70,8 +70,8 @@ spec:
           configMap:
             name: "{{ include ".helm.fullname" . }}-startup"
             items:
-            - key: config.xml
-              path: config.xml
+            - key: config.ini
+              path: config.ini
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

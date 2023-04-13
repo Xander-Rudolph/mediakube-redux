@@ -33,7 +33,7 @@ spec:
             mountPath: /config
           - name: file-config
             mountPath: /preload        
-        command: ['sh', '-c', "cat /preload/config.xml > /config/config.xml"]
+        command: ['sh', '-c', "if [ ! -f /config/config.yml ]; then cat /preload/config.yml > /config/config.yml; fi"]
       containers:
         - name: {{ include ".helm.fullname" . }}
           securityContext:
