@@ -23,6 +23,7 @@ data:
     'IS_TEMPLATE = False'
     WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '{{ .Values.global.radarrLogDb }}')\gexec
     ;
+    -- bazarr
     SELECT 'CREATE DATABASE {{ .Values.global.bazarrDb }} '
     'WITH '
     'ENCODING = ''UTF8'' '
