@@ -27,6 +27,10 @@ global:
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
+  radarrKey: YOUR_RADARR_KEY
+  sonarrKey: YOUR_SONARR_KEY
+  bazarrDb: bazarr
+
 
 ##################
 # Network config #

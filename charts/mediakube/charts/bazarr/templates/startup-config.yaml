@@ -21,8 +21,8 @@ data:
     use_postprocessing_threshold = False
     postprocessing_threshold_movie = 70
     use_postprocessing_threshold_movie = False
-    use_sonarr = False
-    use_radarr = False
+    use_sonarr = True
+    use_radarr = True
     path_mappings_movie = []
     serie_default_enabled = False
     serie_default_profile = 
@@ -84,11 +84,11 @@ data:
     base_url = /sonarr
     ssl = False
     http_timeout = 60
-    apikey = 
+    apikey = {{ .Values.global.sonarrKey }}
     full_update = Daily
     full_update_day = 6
     full_update_hour = 4
-    only_monitored = False
+    only_monitored = True
     series_sync = 60
     episodes_sync = 60
     excluded_tags = []
@@ -103,11 +103,11 @@ data:
     base_url = /radarr
     ssl = False
     http_timeout = 60
-    apikey = 
+    apikey = {{ .Values.global.radarrKey }}
     full_update = Daily
     full_update_day = 6
     full_update_hour = 5
-    only_monitored = False
+    only_monitored = True
     movies_sync = 60
     excluded_tags = []
     use_ffprobe_cache = True
@@ -251,8 +251,6 @@ data:
     enabled = false
     host = postgres
     port = 5432
-    database = 
-    username = 
-    password = 
-
-
+    database = bazarr
+    username = {{ .Values.global.postgresUser }}
+    password = {{ .Values.global.postgresPassword }}
