@@ -1,0 +1,36 @@
+image:
+  repository: lscr.io/linuxserver/bazarr
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 6767
+  hostname: bazarr
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+
+config:
+  UrlBase: /bazarr
+  LogLevel: info
+  UpdateMechanism: Docker
+  BindAddress: "*"
+  Port: 8686
+  SslPort: 6868
+  EnableSsl: False
+  LaunchBrowser: True
+  AuthenticationMethod: None
+  Branch: master
+  SslCertPath: 
+  SslCertPassword: 
+  InstanceName: bazarr
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "bazarr"

@@ -20,6 +20,7 @@ The networking and routing for this cluster is managed via Traefik and the vario
 `/readarr`
 `/prowlarr`
 `/requestrr`
+`/bazarr`
 
 ## Traefik Dashboard
 The following block controls the traefik dashboard:
