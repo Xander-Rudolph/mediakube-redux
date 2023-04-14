@@ -31,7 +31,6 @@ global:
   sonarrKey: YOUR_SONARR_KEY
   bazarrDb: bazarr
   URL: yourdomain.url
-  DUCKDNSTOKEN: YOUR_DNS_TOKEN
   SUBDOMAINS: wildcard
 
 ##################

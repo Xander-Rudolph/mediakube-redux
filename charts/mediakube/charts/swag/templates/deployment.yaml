@@ -31,14 +31,18 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.image.env }}
           env: 
+          - name: DUCKDNSTOKEN
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-duckdns-secret"
+                key: TOKEN
+          {{- if .Values.image.env }}
             {{- toYaml .Values.image.env | nindent 12 }}
           {{- end }}
           envFrom:
             - configMapRef:
                 name: "{{ include ".helm.fullname" . }}-configmap"
-            # TODO: remap the DUCKDNSTOKEN from TOKEN in duck dns
           args: [ {{.Values.image.args}} ]
           ports:
             - name: https

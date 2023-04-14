@@ -8,5 +8,4 @@ data:
   PUID: "{{ .Values.global.PUID }}"
   URL: "{{ .Values.global.URL }}"
   VALIDATION: duckdns
-  SUBDOMAINS: "{{ .Values.global.SUBDOMAINS }}"
-  DUCKDNSTOKEN: "{{ .Values.global.DUCKDNSTOKEN }}"
+  SUBDOMAINS: wildcard
