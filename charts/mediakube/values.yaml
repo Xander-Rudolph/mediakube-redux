@@ -20,18 +20,17 @@ global:
   mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
   # linuxserver common variables
   timezone: Etc/UTC
-  PGID: 0
-  PUID: 0
+  PGID: 1000
+  PUID: 1000
   # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
-  radarrKey: YOUR_RADARR_KEY
-  sonarrKey: YOUR_SONARR_KEY
   bazarrDb: bazarr
   URL: yourdomain.url
-  SUBDOMAINS: wildcard
+  radarrKey: YOUR_RADARR_KEY
+  sonarrKey: YOUR_SONARR_KEY
 
 ##################
 # Network config #
