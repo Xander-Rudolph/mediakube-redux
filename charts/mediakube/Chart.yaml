@@ -8,6 +8,9 @@ dependencies:
   - name: traefik
     version: "^10.24.2"
     repository: https://helm.traefik.io/traefik
+  # - name: authelia
+  #   version: "^0.8.57"
+  #   repository: https://charts.authelia.com
   - name: duckdns
     version: "^0"
     repository: "file://./charts/duckdns"
@@ -35,9 +38,9 @@ dependencies:
   - name: bazarr
     version: "^0"
     repository: "file://./charts/bazarr"
-  # - name: requestrr
-  #   version: "^0"
-  #   repository: "file://./charts/requestrr"
-  # - name: transmission
-  #   version: "^0"
-  #   repository: "file://./charts/transmission"
+  - name: requestrr
+    version: "^0"
+    repository: "file://./charts/requestrr"
+  - name: transmission
+    version: "^0"
+    repository: "file://./charts/transmission"

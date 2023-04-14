@@ -20,17 +20,17 @@ global:
   mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
   # linuxserver common variables
   timezone: Etc/UTC
-  PGID: 0
-  PUID: 0
+  PGID: 1000
+  PUID: 1000
   # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
+  bazarrDb: bazarr
+  URL: yourdomain.url
   radarrKey: YOUR_RADARR_KEY
   sonarrKey: YOUR_SONARR_KEY
-  bazarrDb: bazarr
-
 
 ##################
 # Network config #
@@ -45,12 +45,24 @@ duckdns:
   subdomains: YOUR_SUBDOMAINS
   token: YOUR_DNS_TOKEN
 
+swag:
+  # Use hostPath for local storage
+  hostPath: swag
+  fullnameOverride: swag
+
 # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml  
 traefik:
   image:
     pullPolicy: Always
   service:
     type: LoadBalancer
+
+# https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
+authelia:
+  ingress:
+  traefikCRD:
+    enabled: true 
+    disableIngressRoute: true
 
 ########################################
 # Service config - local disk required #

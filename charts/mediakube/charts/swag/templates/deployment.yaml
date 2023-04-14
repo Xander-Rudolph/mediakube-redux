@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include ".helm.fullname" . }}
+  labels:
+    {{- include ".helm.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include ".helm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include ".helm.selectorLabels" . | nindent 8 }}
+    spec:
+      hostname: {{ .Values.image.hostname }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include ".helm.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include ".helm.fullname" . }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: 
+          - name: DUCKDNSTOKEN
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-duckdns-secret"
+                key: TOKEN
+          {{- if .Values.image.env }}
+            {{- toYaml .Values.image.env | nindent 12 }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: "{{ include ".helm.fullname" . }}-configmap"
+          args: [ {{.Values.image.args}} ]
+          ports:
+            - name: https
+              containerPort: 80
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: config-vol
+              mountPath: /config
+      volumes:
+        - name: config-vol
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
