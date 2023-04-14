@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pv
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: {{ .Values.global.configCapacity }}
+  {{- if .Values.configPath }}
+  nfs:
+    path: {{ .Values.global.configPath }}/{{ .Values.configPath }}
+    server: {{ .Values.global.nfs.server }}
+  mountOptions:
+    - nfsvers=4.1
+  {{- end }}
+  {{- if .Values.hostPath }}
+  hostPath:
+    path: {{ .Values.global.hostPath }}/{{ .Values.hostPath }}
+  {{- end }}
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.global.configCapacity }}
+  selector: {}
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: {{ .Release.Name }}-{{ include ".helm.fullname" . }}-pv

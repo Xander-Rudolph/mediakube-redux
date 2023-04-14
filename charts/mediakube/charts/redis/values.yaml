@@ -1,0 +1,15 @@
+redis:
+  hostname: redis
+  repository: redis
+  tag: 14
+  pullPolicy: Always
+  containerPort: 6379
+  mountPath: /data
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "redis"
