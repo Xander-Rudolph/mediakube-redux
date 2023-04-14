@@ -30,7 +30,9 @@ global:
   radarrKey: YOUR_RADARR_KEY
   sonarrKey: YOUR_SONARR_KEY
   bazarrDb: bazarr
-
+  URL: yourdomain.url
+  DUCKDNSTOKEN: YOUR_DNS_TOKEN
+  SUBDOMAINS: wildcard
 
 ##################
 # Network config #
@@ -45,12 +47,24 @@ duckdns:
   subdomains: YOUR_SUBDOMAINS
   token: YOUR_DNS_TOKEN
 
+swag:
+  # Use hostPath for local storage
+  hostPath: swag
+  fullnameOverride: swag
+
 # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml  
 traefik:
   image:
     pullPolicy: Always
   service:
     type: LoadBalancer
+
+# https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
+authelia:
+  ingress:
+  traefikCRD:
+    enabled: true 
+    disableIngressRoute: true
 
 ########################################
 # Service config - local disk required #

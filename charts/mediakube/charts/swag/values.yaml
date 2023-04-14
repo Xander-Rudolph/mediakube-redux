@@ -1,0 +1,40 @@
+# Use hostPath for local storage
+# hostPath: swag
+# configPath: swag
+fullnameOverride: swag
+
+image:
+  repository: ghcr.io/linuxserver/swag
+  tag: "latest"
+  pullPolicy: Always
+  hostname: swag
+  # env:
+  #   - name: SUBDOMAINS
+  #     value: www, #optional
+  #   - name: CERTPROVIDER
+  #     value: #optional
+  #   - name: DNSPLUGIN
+  #     value: cloudflare #optional
+  #   - name: PROPAGATION
+  #     value: #optional
+  #   - name: EMAIL
+  #     value: #optional
+  #   - name: ONLY_SUBDOMAINS
+  #     value: false #optional
+  #   - name: EXTRA_DOMAINS
+  #     value: #optional
+  #   - name: STAGING
+  #     value: false #optional
+
+securityContext:
+  capabilities:
+    add:
+    - NET_ADMIN
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "swag"

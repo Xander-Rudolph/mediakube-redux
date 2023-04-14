@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Release.Name }}-configmap"
+data:
+  TZ: {{ .Values.global.timezone }}
+  PGID: "{{ .Values.global.PGID }}"
+  PUID: "{{ .Values.global.PUID }}"
+  URL: "{{ .Values.global.URL }}"
+  VALIDATION: duckdns
+  SUBDOMAINS: "{{ .Values.global.SUBDOMAINS }}"
+  DUCKDNSTOKEN: "{{ .Values.global.DUCKDNSTOKEN }}"
