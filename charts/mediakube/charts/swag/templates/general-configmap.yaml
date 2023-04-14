@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{ .Release.Name }}-configmap"
+  name: "{{ include ".helm.fullname" . }}-configmap"
 data:
   TZ: {{ .Values.global.timezone }}
   PGID: "{{ .Values.global.PGID }}"
