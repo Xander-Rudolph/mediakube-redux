@@ -67,6 +67,9 @@ traefik:
       
 # https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
 authelia:
+  # no idea what this actually does... it creates the allowed ingress traffic but I don't think I wired it up right
+  networkPolicy:
+    enabled: true
   persistence:
     enabled: true
     size: 10Gi
@@ -111,6 +114,9 @@ authelia:
       enabled: true
       secret: authelia-tls
     traefikCRD:
+      entryPoints:
+      - web
+      - websecure
       enabled: true 
       matchOverride: (Host(`yourdomain.url`) || Host(`localhost`)) && PathPrefix(`/`)
       middlewares:
@@ -140,7 +146,6 @@ authelia:
             # before:
             # - name: extra-middleware-name
             #   namespace: default
-
             # List of Middlewares to apply after the middleware in the IngressRoute chain.
             after: []
             # after:
