@@ -118,7 +118,7 @@ authelia:
       - web
       - websecure
       enabled: true 
-      matchOverride: (Host(`yourdomain.url`) || Host(`localhost`)) && PathPrefix(`/`)
+      matchOverride: (Host("yourdomain.url") || Host("localhost")) && PathPrefix("/")
       middlewares:
         auth:
           nameOverride: authelia-auth
