@@ -32,7 +32,8 @@ spec:
           imagePullPolicy: {{ .Values.redis.pullPolicy }}
           env: 
             {{- toYaml .Values.redis.env | nindent 12 }}
-          args: [ {{.Values.redis.args}} ]
+          command: ["redis-server"]
+          args: ["--requirepass", "$(REDIS_PASSWORD)"]
           ports:
             - name: http
               containerPort: {{ .Values.redis.containerPort }}

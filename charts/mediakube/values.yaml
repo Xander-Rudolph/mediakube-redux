@@ -25,7 +25,7 @@ global:
   # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
-  # postgres settings
+  # redis settings
   redisUser: "redis"
   redisPassword: "YOUR_REDIS_PASSWORD"
 
@@ -61,13 +61,91 @@ traefik:
     pullPolicy: Always
   service:
     type: LoadBalancer
-
+  providers:
+    kubernetesCRD:
+      allowCrossNamespace: true
+      
 # https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
 authelia:
+  persistence:
+    enabled: true
+    size: 10Gi
+  secret:
+    # storageEncryptionKey:
+    #   value: 
+    storage:
+      value: YOUR_POSTGRES_PASSWORD
+    redis:
+      value: YOUR_REDIS_PASSWORD
+  configMap:
+    notifier:
+      smtp:
+        enabled: false
+      filesystem:
+        enabled: true        
+    authentication_backend:
+      ldap:
+        enabled: false
+      file:
+        enabled: true
+    session:
+      redis:
+        host: redis
+        enabled: true
+        enabledSecret: true
+    storage: 
+      postgres:
+        enabled: true
+        host: postgres
+        port: 5432
+        database: authelia
+        schema: public
+        username: authelia
+        timeout: 5s
+        tls:
+          enabled: false
+          skip_verify: true
   ingress:
-  traefikCRD:
-    enabled: true 
-    disableIngressRoute: true
+    enabled: true
+    tls:
+      enabled: true
+      secret: authelia-tls
+    traefikCRD:
+      enabled: true 
+      matchOverride: (Host(`yourdomain.url`) || Host(`localhost`)) && PathPrefix(`/`)
+      middlewares:
+        auth:
+          nameOverride: authelia-auth
+          authResponseHeaders:
+          - Remote-User
+          - Remote-Name
+          - Remote-Email
+          - Remote-Groups
+        chains:
+          auth:
+            nameOverride: authelia-auth-chain
+            # List of Middlewares to apply before the forwardAuth Middleware in the authentication chain.
+            before: []
+            # before:
+            # - name: extra-middleware-name
+            #   namespace: default
+            # List of Middlewares to apply after the forwardAuth Middleware in the authentication chain.
+            after: []
+            # after:
+            # - name: extra-middleware-name
+            #   namespace: default
+          ingressRoute:
+            # List of Middlewares to apply before the middleware in the IngressRoute chain.
+            before: []
+            # before:
+            # - name: extra-middleware-name
+            #   namespace: default
+
+            # List of Middlewares to apply after the middleware in the IngressRoute chain.
+            after: []
+            # after:
+            # - name: extra-middleware-name
+            #   namespace: default
 
 ########################################
 # Service config - local disk required #
@@ -144,6 +222,7 @@ radarr:
 
 transmission:
   configPath: transmission
+  # # optional  
   # hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
@@ -236,7 +315,7 @@ bazarr:
   #   InstanceName: bazarr
 
 requestrr:
-  hostPath: requestrr # use only one... host or config
+  configPath: requestrr # use only one... host or config
   fullnameOverride: requestrr
   config:
     discordAppId: YOUR_DISCORD_APPID
