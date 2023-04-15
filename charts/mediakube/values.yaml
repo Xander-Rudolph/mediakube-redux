@@ -67,13 +67,14 @@ traefik:
       
 # https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
 authelia:
-  # no idea what this actually does... it creates the allowed ingress traffic but I don't think I wired it up right
+  #TODO: no idea what this actually does... it creates the allowed ingress traffic but I don't think I wired it up right
   networkPolicy:
     enabled: true
   persistence:
     enabled: true
     size: 10Gi
   secret:
+    #TODO: I think this needs to be managed in order to prevent needing a clean postgres DB each time
     # storageEncryptionKey:
     #   value: 
     storage:
