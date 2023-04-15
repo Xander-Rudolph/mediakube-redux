@@ -25,6 +25,11 @@ global:
   # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
+  # postgres settings
+  redisUser: "redis"
+  redisPassword: "YOUR_REDIS_PASSWORD"
+
+  # other
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr
@@ -81,6 +86,13 @@ postgresql:
   # Use hostPath for local storage
   hostPath: postgres
   fullnameOverride: postgres
+
+redis:
+  # Use configPath for NFS... permission issues with nfs creation though
+  # configPath: redis
+  # Use hostPath for local storage
+  hostPath: redis
+  fullnameOverride: redis
 
 sonarr:
   # Use configPath for NFS... latency with sqlite
