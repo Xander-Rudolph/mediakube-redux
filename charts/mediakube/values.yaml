@@ -303,20 +303,6 @@ bazarr:
   #   SslCertPassword: 
   #   InstanceName: bazarr
 
-requestrr:
-  # configPath: requestrr # use only one... host or config
-  hostPath: requestrr # use only one... host or config
-  fullnameOverride: requestrr
-  config:
-    discordAppId: YOUR_DISCORD_APPID
-    discordBotToken: YOUR_DISCORD_BOTTOKEN
-    # # optional
-    # UrlBase: /requestrr
-    # Port: 4545
-    # ombi: ombi
-    # sonarr: sonarr
-    # radarr: radarr
-
 #######################################
 # Service config - NFS optional mount #
 #######################################
@@ -330,3 +316,20 @@ transmission:
   vpn:
     username: YOUR_PIA_USERNAME
     password: YOUR_PIA_PASSWORD
+
+############################################
+# Disabled due to concerns around security #
+############################################
+requestrr:
+  # configPath: requestrr # use only one... host or config
+  hostPath: requestrr # use only one... host or config
+  fullnameOverride: requestrr
+  config:
+    discordAppId: YOUR_DISCORD_APPID
+    discordBotToken: YOUR_DISCORD_BOTTOKEN
+    # # optional
+    # UrlBase: /requestrr
+    # Port: 4545
+    # ombi: ombi
+    # sonarr: sonarr
+    # radarr: radarr

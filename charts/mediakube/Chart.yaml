@@ -38,9 +38,9 @@ dependencies:
   - name: redis
     version: "^0"
     repository: "file://./charts/redis"
-  - name: requestrr
-    version: "^0"
-    repository: "file://./charts/requestrr"
+  # - name: requestrr
+  #   version: "^0"
+  #   repository: "file://./charts/requestrr"
   - name: sonarr
     version: "^0"
     repository: "file://./charts/sonarr"
