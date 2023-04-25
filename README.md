@@ -62,7 +62,6 @@ helm upgrade -i mediakube .
 popd
 ```
 
-
 Also... powershell is really easy to install.
 Mac:
 
@@ -73,3 +72,9 @@ Linux:
 `snap install powershell`
 
 Then run the command `pwsh` to start a powershell session.
+
+
+## How to test the VPN
+After spooling the VPN you can use to confirm net routing on each container using the following:
+
+`curl checkip.amazonaws.com`
