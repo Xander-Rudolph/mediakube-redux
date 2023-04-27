@@ -20,8 +20,8 @@ global:
   mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
   # linuxserver common variables
   timezone: Etc/UTC
-  PGID: 1000
-  PUID: 1000
+  PGID: 0
+  PUID: 0
   # postgres settings
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
@@ -201,14 +201,31 @@ sonarr:
   #   InstanceName: Sonarr
   #   SyslogPort: 514
 
-#######################################
-# Service config - NFS optional mount #
-#######################################
+prowlarr:
+  hostPath: prowlarr # use only one... host or config
+  # configPath: prowlarr # use only one... host or config
+  fullnameOverride: prowlarr
+  # # optional
+  # config:
+  #   UrlBase: /prowlarr
+  #   LogLevel: info
+  #   UpdateMechanism: Docker
+  #   BindAddress: "*"
+  #   Port: 9696
+  #   SslPort: 6969
+  #   EnableSsl: False
+  #   LaunchBrowser: True
+  #   AuthenticationMethod: None
+  #   Branch: master
+  #   SslCertPath: 
+  #   SslCertPassword: 
+  #   InstanceName: Prowlarr
+
 radarr:
-  configPath: radarr # use only one... host or config
+  hostPath: radarr # use only one... host or config
+  # configPath: radarr # use only one... host or config
   fullnameOverride: radarr
   # # optional
-  # hostPath: radarr # use only one... host or config
   # config:
   #   UrlBase: /radarr
   #   PostgresPort: 5432
@@ -226,45 +243,11 @@ radarr:
   #   SslCertPassword: 
   #   InstanceName: Radarr
 
-transmission:
-  configPath: transmission
-  # # optional  
-  # hostPath: transmission
-  fullnameOverride: transmission
-  username: YOUR_USERNAME
-  password: YOUR_PASSWORD
-  vpn:
-    username: YOUR_PIA_USERNAME
-    password: YOUR_PIA_PASSWORD
-
-prowlarr:
-  configPath: prowlarr # use only one... host or config
-  fullnameOverride: prowlarr
-  # # optional
-  # hostPath: prowlarr # use only one... host or config
-  # config:
-  #   UrlBase: /prowlarr
-  #   LogLevel: info
-  #   UpdateMechanism: Docker
-  #   BindAddress: "*"
-  #   Port: 9696
-  #   SslPort: 6969
-  #   EnableSsl: False
-  #   LaunchBrowser: True
-  #   AuthenticationMethod: None
-  #   Branch: master
-  #   SslCertPath: 
-  #   SslCertPassword: 
-  #   InstanceName: Prowlarr
-
-##################################
-# Service config - Still testing #
-##################################
 lidarr:
-  configPath: lidarr # use only one... host or config
+  # configPath: lidarr # use only one... host or config
+  hostPath: lidarr # use only one... host or config
   fullnameOverride: lidarr
   # # optional
-  # hostPath: lidarr # use only one... host or config
   # config:
   #   UrlBase: /lidarr
   #   LogLevel: info
@@ -281,10 +264,10 @@ lidarr:
   #   InstanceName: Lidarr
 
 readarr:
-  configPath: readarr # use only one... host or config
+  # configPath: readarr # use only one... host or config
+  hostPath: readarr # use only one... host or config
   fullnameOverride: readarr
   # # optional
-  # hostPath: readarr # use only one... host or config
   # config:
   #   UrlBase: /readarr
   #   LogLevel: info
@@ -301,10 +284,10 @@ readarr:
   #   InstanceName: Readarr
 
 bazarr:
-  configPath: bazarr # use only one... host or config
+  # configPath: bazarr # use only one... host or config
+  hostPath: bazarr # use only one... host or config
   fullnameOverride: bazarr
   # # optional
-  # hostPath: bazarr # use only one... host or config
   # config:
   #   UrlBase: /bazarr
   #   LogLevel: info
@@ -320,8 +303,26 @@ bazarr:
   #   SslCertPassword: 
   #   InstanceName: bazarr
 
+#######################################
+# Service config - NFS optional mount #
+#######################################
+transmission:
+  configPath: transmission
+  # # optional  
+  # hostPath: transmission
+  fullnameOverride: transmission
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+  vpn:
+    username: YOUR_PIA_USERNAME
+    password: YOUR_PIA_PASSWORD
+
+############################################
+# Disabled due to concerns around security #
+############################################
 requestrr:
-  configPath: requestrr # use only one... host or config
+  # configPath: requestrr # use only one... host or config
+  hostPath: requestrr # use only one... host or config
   fullnameOverride: requestrr
   config:
     discordAppId: YOUR_DISCORD_APPID
@@ -332,5 +333,3 @@ requestrr:
     # ombi: ombi
     # sonarr: sonarr
     # radarr: radarr
-  # # optional
-  # configPath: requestrr # use only one... host or config
