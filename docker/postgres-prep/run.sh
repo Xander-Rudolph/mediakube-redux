@@ -3,6 +3,7 @@
 echo "Setting required environment variables..."
 export POSTGRES_APP_DB=${DATABASE_NAME}
 export POSTGRES_APP_USER=${DATABASE_USER}
+export PGPASSWORD=${POSTGRES_PASSWORD}
 export POSTGRES_APP_PASSWORD=${DATABASE_PASSWORD}
 
 # Now validate that all the required environment variables are present.
@@ -80,4 +81,4 @@ find /sql/scripts -type f -exec sed -i "s/POSTGRES_APP_USER/$POSTGRES_APP_USER/"
 find /sql/scripts -type f -exec sed -i "s/POSTGRES_APP_PASSWORD/$POSTGRES_APP_PASSWORD/" {} \;
 
 # Run all SQL commands
-find /sql/scripts -type f -exec psql --dbname=${POSTGRES_APP_DB} --host=${POSTGRES_HOSTNAME} --port=${POSTGRES_PORT} --username=${POSTGRES_USER} -f {} \;
+find /sql/scripts -type f -exec psql --host=${POSTGRES_HOSTNAME} --port=${POSTGRES_PORT} --username=${POSTGRES_USER} -f {} \;
