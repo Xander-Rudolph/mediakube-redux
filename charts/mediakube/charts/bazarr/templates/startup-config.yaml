@@ -248,7 +248,7 @@ data:
     hearing_impaired = 1
 
     [postgresql]
-    enabled = false
+    enabled = true
     host = postgres
     port = 5432
     database = bazarr

@@ -30,7 +30,7 @@ jobs:
     uses: xander-rudolph/.github/.github/workflows/docker-publish.yml@master
     strategy:
       matrix:
-        image: ['pia-vpn','postgres-prep']
+        image: ['postgres-prep']
     with:
       image_name: ${{ matrix.image }}
       # optional

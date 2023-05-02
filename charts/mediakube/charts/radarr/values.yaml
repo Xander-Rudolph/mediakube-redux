@@ -29,6 +29,15 @@ config:
   SslCertPassword: 
   InstanceName: Radarr
 
+postgres:
+  env:
+    - name: DATABASE_NAME 
+      value: "radarr"
+    - name: DATABASE_USER
+      value: "radarr"
+    - name: DATABASE_PASSWORD 
+      value: "radarr"
+
 service:
   type: ClusterIP
 
