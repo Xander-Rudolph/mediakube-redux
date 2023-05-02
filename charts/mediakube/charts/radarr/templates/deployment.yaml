@@ -26,15 +26,30 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: prep-postgres
+        - name: prep-postgres-radarrmain
           image: ghcr.io/xander-rudolph/postgres-prep:latest
           envFrom:
             - configMapRef:
                 name: "postgres-configmap"
             - secretRef:
                 name: "postgres-secret"
-          env: 
-            {{- toYaml .Values.postgres.env | nindent 12 }}
+            - secretRef:
+                name: "{{ include ".helm.fullname" . }}-secret"
+          env:
+            - name: DATABASE_NAME
+              value: {{ .Values.global.radarrMainDb }}                
+        - name: prep-postgres-radarrlog
+          image: ghcr.io/xander-rudolph/postgres-prep:latest
+          envFrom:
+            - configMapRef:
+                name: "postgres-configmap"
+            - secretRef:
+                name: "postgres-secret"
+            - secretRef:
+                name: "{{ include ".helm.fullname" . }}-secret"
+          env:
+            - name: DATABASE_NAME
+              value: {{ .Values.global.radarrLogDb }}
         - name: set-config-xml
           image: busybox:latest
           volumeMounts:
@@ -42,7 +57,7 @@ spec:
               mountPath: /config
             - name: file-config
               mountPath: /preload        
-          command: ['sh', '-c', "if [ ! -f /config/config.yml ]; then cat /preload/config.yml > /config/config.yml; fi"]
+          command: ['sh', '-c', "if [ ! -f /config/config.xml ]; then cat /preload/config.xml > /config/config.xml; fi"]
       containers:
         - name: {{ include ".helm.fullname" . }}
           securityContext:
