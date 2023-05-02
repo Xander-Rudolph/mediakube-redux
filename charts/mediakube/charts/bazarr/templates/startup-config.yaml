@@ -251,6 +251,6 @@ data:
     enabled = true
     host = postgres
     port = 5432
-    database = bazarr
-    username = {{ .Values.global.postgresUser }}
-    password = {{ .Values.global.postgresPassword }}
+    database = {{ .Values.postgres.DATABASE_NAME }}
+    username = {{ .Values.postgres.DATABASE_USER }}
+    password = {{ .Values.postgres.DATABASE_PASSWORD }}

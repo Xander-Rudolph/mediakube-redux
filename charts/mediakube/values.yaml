@@ -244,7 +244,7 @@ radarr:
   hostPath: radarr # use only one... host or config
   fullnameOverride: radarr
   # # optional
-  # configPath: radarr # use only one... host or config
+  # configPath: radarr 
   # postgres:
   #   env:
   #     - name: POSTGRES_APP_DB
@@ -313,6 +313,10 @@ readarr:
 bazarr:
   hostPath: bazarr # use only one... host or config
   fullnameOverride: bazarr
+  postgres:
+    DATABASE_NAME: "bazarr"
+    DATABASE_USER: "bazarr"
+    DATABASE_PASSWORD: "YOUR_BAZARR_DBPASS"
   # # optional
   # configPath: bazarr
   # config:

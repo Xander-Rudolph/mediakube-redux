@@ -27,6 +27,11 @@ config:
   SslCertPassword: 
   InstanceName: bazarr
 
+postgres:
+  DATABASE_NAME: "bazarr"
+  DATABASE_USER: "bazarr"
+  DATABASE_PASSWORD: "bazarr"
+
 service:
   type: ClusterIP
 
