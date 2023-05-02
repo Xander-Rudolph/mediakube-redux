@@ -26,20 +26,15 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: prep-postgres
-          image: ghcr.io/xander-rudolph/postgres-prep:latest
-          envFrom:
-            - configMapRef:
-                name: "postgres-configmap"
-            - secretRef:
-                name: "postgres-secret"
-          env:
-            - name: DATABASE_NAME 
-              value: {{ .Values.postgres.DATABASE_NAME }}
-            - name: DATABASE_USER
-              value: {{ .Values.postgres.DATABASE_USER }}
-            - name: DATABASE_PASSWORD 
-              value: {{ .Values.postgres.DATABASE_PASSWORD }}
+      - name: prep-postgres
+        image: ghcr.io/xander-rudolph/postgres-prep:latest
+        envFrom:
+          - configMapRef:
+              name: "postgres-configmap"
+          - secretRef:
+              name: "postgres-secret"
+          - secretRef:
+              name: "{{ include ".helm.fullname" . }}-secret"
       - name: set-config-xml
         image: busybox:latest
         volumeMounts:
