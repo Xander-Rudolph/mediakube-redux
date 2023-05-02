@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: (PathPrefix("/ombi"))
+    - match: (PathPrefix("{{ .Values.config.UrlBase }}"))
       kind: Rule
       services:
         - name: {{ include ".helm.fullname" . }}
