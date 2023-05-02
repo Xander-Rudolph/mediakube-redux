@@ -49,6 +49,7 @@ global:
   ###################
   # other variables #
   ###################
+  autheliadbpass: autheliaDB
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr

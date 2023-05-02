@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: provision-authelia-db
+spec:
+  parallelism: 1    
+  completions: 1    
+  template:         
+    metadata:
+      name: provision-authelia-db
+    spec:
+      containers:
+        - name: prep-authelia-postgres
+          image: ghcr.io/xander-rudolph/postgres-prep:latest
+          envFrom:
+            - configMapRef:
+                name: "postgres-configmap"
+            - secretRef:
+                name: "postgres-secret"
+          env:
+            - name: DATABASE_NAME 
+              value: "authelia"
+            - name: DATABASE_USER
+              value: "authelia"
+            - name: DATABASE_PASSWORD 
+              value: {{ .Values.global.autheliadbpass }}
+      restartPolicy: Never
