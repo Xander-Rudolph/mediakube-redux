@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:latest
 
 LABEL org.opencontainers.image.title "pia-vpn"
 LABEL org.opencontainers.image.description "Sidecar image for PIA VPN"

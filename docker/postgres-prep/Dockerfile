@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:latest
 
 USER root
 
