@@ -26,14 +26,23 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-      - name: set-config-xml
-        image: busybox:latest
-        volumeMounts:
-          - name: config-vol
-            mountPath: /config
-          - name: file-config
-            mountPath: /preload        
-        command: ['sh', '-c', "if [ ! -f /config/config.yml ]; then cat /preload/config.yml > /config/config.yml; fi"]
+        - name: prep-postgres
+          image: ghcr.io/xander-rudolph/postgres-prep:latest
+          envFrom:
+            - configMapRef:
+                name: "postgres-configmap"
+            - secretRef:
+                name: "postgres-secret"
+          env: 
+            {{- toYaml .Values.postgres.env | nindent 12 }}
+        - name: set-config-xml
+          image: busybox:latest
+          volumeMounts:
+            - name: config-vol
+              mountPath: /config
+            - name: file-config
+              mountPath: /preload        
+          command: ['sh', '-c', "if [ ! -f /config/config.yml ]; then cat /preload/config.yml > /config/config.yml; fi"]
       containers:
         - name: {{ include ".helm.fullname" . }}
           securityContext:

@@ -7,29 +7,48 @@ debug:
 # Global config #
 #################
 global:
+  #################
+  # NFS config #
+  #################
   # This section is needed to use NFS for storage
   nfs:
     server: YOUR_NFS_SERVER
-  # nfs config path
-  configPath: YOUR_CONFIG_PATH
+  mediaPath: YOUR_MEDIA_PATH
+  mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
+
+  # # This section is a bit problematic because some apps don't behave well or throw permission errors for NFS storage
+  # # nfs config path
+  # configPath: YOUR_CONFIG_PATH
+  
+  #################
+  # Local config #
+  #################
   # local storage path such as /mnt/d/kubestore
   hostPath: "YOUR_LOCAL_STORAGE" # use this path localized storage
   configCapacity: 10Gi # each service will be allocated the same capacity. Divide the total config capacity by the number of services that will be deployed
-  # media NFS path
-  mediaPath: YOUR_MEDIA_PATH
-  mediaCapacity: 15Ti # total capacity of your NFS media share (unless you want a buffer)
-  # linuxserver common variables
+
+  ################################
+  # linuxserver common variables #
+  ################################
   timezone: Etc/UTC
   PGID: 0
   PUID: 0
-  # postgres settings
+
+  ######################
+  # postgres variables #
+  ######################
   postgresUser: "postgres"
   postgresPassword: "YOUR_POSTGRES_PASSWORD"
-  # redis settings
+
+  ###################
+  # redis variables #
+  ###################
   redisUser: "redis"
   redisPassword: "YOUR_REDIS_PASSWORD"
 
-  # other
+  ###################
+  # other variables #
+  ###################
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr
@@ -51,7 +70,6 @@ duckdns:
   token: YOUR_DNS_TOKEN
 
 swag:
-  # Use hostPath for local storage
   hostPath: swag
   fullnameOverride: swag
 
@@ -64,7 +82,10 @@ traefik:
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
-      
+
+#########################
+# Authentication config #
+#########################
 # https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
 authelia:
   #TODO: no idea what this actually does... it creates the allowed ingress traffic but I don't think I wired it up right
@@ -153,37 +174,32 @@ authelia:
             # - name: extra-middleware-name
             #   namespace: default
 
-########################################
-# Service config - local disk required #
-########################################
-# this section forces use of local storage because of issues with the NFS not allowing startup because it tries to chmod
-ombi:
-  # Use configPath for NFS... permission issues with nfs creation though
-  # configPath: ombi
-  # Use hostPath for local storage
-  hostPath: ombi
-  fullnameOverride: ombi
-
 postgresql:
-  # Use configPath for NFS... permission issues with nfs creation though
-  # configPath: postgres
-  # Use hostPath for local storage
   hostPath: postgres
   fullnameOverride: postgres
+  # # optional
+  # configPath: postgres
 
 redis:
-  # Use configPath for NFS... permission issues with nfs creation though
-  # configPath: redis
-  # Use hostPath for local storage
   hostPath: redis
   fullnameOverride: redis
+  # # optional
+  # configPath: redis
+
+####################
+# Media app config #
+####################
+ombi:
+  hostPath: ombi
+  fullnameOverride: ombi
+  # # optional
+  # configPath: ombi
 
 sonarr:
-  # Use configPath for NFS... latency with sqlite
-  # configPath: sonarr
   hostPath: sonarr
   fullnameOverride: sonarr
   # # optional
+  # configPath: sonarr
   # config:
   #   UrlBase: /sonarr
   #   PostgresPort: 5432
@@ -203,9 +219,9 @@ sonarr:
 
 prowlarr:
   hostPath: prowlarr # use only one... host or config
-  # configPath: prowlarr # use only one... host or config
   fullnameOverride: prowlarr
   # # optional
+  # configPath: prowlarr # use only one... host or config
   # config:
   #   UrlBase: /prowlarr
   #   LogLevel: info
@@ -223,9 +239,17 @@ prowlarr:
 
 radarr:
   hostPath: radarr # use only one... host or config
-  # configPath: radarr # use only one... host or config
   fullnameOverride: radarr
   # # optional
+  # configPath: radarr # use only one... host or config
+  # postgres:
+  #   env:
+  #     - name: POSTGRES_APP_DB
+  #       value: "radarr"
+  #     - name: POSTGRES_APP_USER
+  #       value: "radarr"
+  #     - name: POSTGRES_APP_PASSWORD
+  #       value: "radarr"
   # config:
   #   UrlBase: /radarr
   #   PostgresPort: 5432
@@ -244,10 +268,10 @@ radarr:
   #   InstanceName: Radarr
 
 lidarr:
-  # configPath: lidarr # use only one... host or config
   hostPath: lidarr # use only one... host or config
   fullnameOverride: lidarr
   # # optional
+  # configPath: lidarr 
   # config:
   #   UrlBase: /lidarr
   #   LogLevel: info
@@ -264,10 +288,10 @@ lidarr:
   #   InstanceName: Lidarr
 
 readarr:
-  # configPath: readarr # use only one... host or config
   hostPath: readarr # use only one... host or config
   fullnameOverride: readarr
   # # optional
+  # configPath: readarr 
   # config:
   #   UrlBase: /readarr
   #   LogLevel: info
@@ -284,10 +308,10 @@ readarr:
   #   InstanceName: Readarr
 
 bazarr:
-  # configPath: bazarr # use only one... host or config
   hostPath: bazarr # use only one... host or config
   fullnameOverride: bazarr
   # # optional
+  # configPath: bazarr
   # config:
   #   UrlBase: /bazarr
   #   LogLevel: info
@@ -303,33 +327,30 @@ bazarr:
   #   SslCertPassword: 
   #   InstanceName: bazarr
 
-#######################################
-# Service config - NFS optional mount #
-#######################################
 transmission:
-  configPath: transmission
-  # # optional  
-  # hostPath: transmission
+  hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
   password: YOUR_PASSWORD
   vpn:
-    username: YOUR_PIA_USERNAME
-    password: YOUR_PIA_PASSWORD
+    username: YOUR_VPN_USERNAME
+    password: YOUR_VPN_PASSWORD
+    LOC: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
+  # # optional  
+  # configPath: transmission
 
 ############################################
 # Disabled due to concerns around security #
 ############################################
-requestrr:
-  # configPath: requestrr # use only one... host or config
-  hostPath: requestrr # use only one... host or config
-  fullnameOverride: requestrr
-  config:
-    discordAppId: YOUR_DISCORD_APPID
-    discordBotToken: YOUR_DISCORD_BOTTOKEN
-    # # optional
-    # UrlBase: /requestrr
-    # Port: 4545
-    # ombi: ombi
-    # sonarr: sonarr
-    # radarr: radarr
+# requestrr:
+#   hostPath: requestrr # use only one... host or config
+#   fullnameOverride: requestrr
+#   config:
+#     discordAppId: YOUR_DISCORD_APPID
+#     discordBotToken: YOUR_DISCORD_BOTTOKEN
+#     # optional
+#     UrlBase: /requestrr
+#     Port: 4545
+#     ombi: ombi
+#     sonarr: sonarr
+#     radarr: radarr
