@@ -9,6 +9,13 @@ on:
   pull_request:
 
 jobs:
+  debug:
+    permissions: write-all # Check permission when leave comment action failed
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo ${{ github.repository_owner }}
+
   review:
     if: ${{ github.event_name == 'pull_request' }}
     permissions: write-all # Check permission when leave comment action failed
@@ -16,6 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: OpenAI PR Review
         uses: detectiveCrow/ai-review-action@latest
         env:
