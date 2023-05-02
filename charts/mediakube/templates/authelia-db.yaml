@@ -19,9 +19,9 @@ spec:
                 name: "postgres-secret"
           env:
             - name: DATABASE_NAME 
-              value: {{ .Values.global.autheliaDatabase }}
+              value: {{ .Values.authelia.configMap.storage.postgres.database }}
             - name: DATABASE_USER
-              value: {{ .Values.global.autheliaUser }}
+              value: {{ .Values.authelia.configMap.storage.postgres.username }}
             - name: DATABASE_PASSWORD 
-              value: {{ .Values.global.autheliaDbPass }}
+              value: {{ .Values.authelia.secret.storage.key }}
       restartPolicy: Never

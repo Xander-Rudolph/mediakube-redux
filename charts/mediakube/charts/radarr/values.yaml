@@ -30,13 +30,9 @@ config:
   InstanceName: Radarr
 
 postgres:
-  env:
-    - name: DATABASE_NAME 
-      value: "radarr"
-    - name: DATABASE_USER
-      value: "radarr"
-    - name: DATABASE_PASSWORD 
-      value: "radarr"
+  DATABASE_NAME: "radarr"
+  DATABASE_USER: "radarr"
+  DATABASE_PASSWORD: "radarr"
 
 service:
   type: ClusterIP

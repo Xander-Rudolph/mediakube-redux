@@ -49,9 +49,6 @@ global:
   ###################
   # other variables #
   ###################
-  autheliaUser: YOUR_AUTHELIA_DBUSERNAME
-  autheliaDatabase: YOUR_AUTHELIA_DBNAME
-  autheliaDbPass: YOUR_AUTHELIA_DBPASSWORD
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr
@@ -102,7 +99,7 @@ authelia:
     # storageEncryptionKey:
     #   value: 
     storage:
-      value: YOUR_POSTGRES_PASSWORD
+      value: YOUR_AUTHELIA_DBPASSWORD
     redis:
       value: YOUR_REDIS_PASSWORD
   configMap:
@@ -243,16 +240,12 @@ prowlarr:
 radarr:
   hostPath: radarr # use only one... host or config
   fullnameOverride: radarr
+  postgres:
+    DATABASE_NAME: "radarr"
+    DATABASE_USER: "radarr"
+    DATABASE_PASSWORD: "YOUR_RADARR_DBPASS"
   # # optional
   # configPath: radarr 
-  # postgres:
-  #   env:
-  #     - name: POSTGRES_APP_DB
-  #       value: "radarr"
-  #     - name: POSTGRES_APP_USER
-  #       value: "radarr"
-  #     - name: POSTGRES_APP_PASSWORD
-  #       value: "radarr"
   # config:
   #   UrlBase: /radarr
   #   PostgresPort: 5432
