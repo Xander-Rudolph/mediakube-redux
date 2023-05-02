@@ -9,6 +9,9 @@ image:
     - name: BASE_URL
       value: /ombi
 
+config:
+  UrlBase: /ombi
+
 service:
   type: ClusterIP
 
