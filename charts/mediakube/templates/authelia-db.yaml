@@ -23,5 +23,5 @@ spec:
             - name: DATABASE_USER
               value: {{ .Values.authelia.configMap.storage.postgres.username }}
             - name: DATABASE_PASSWORD 
-              value: {{ .Values.authelia.secret.storage.key }}
+              value: {{ .Values.authelia.secret.storage.value }}
       restartPolicy: Never
