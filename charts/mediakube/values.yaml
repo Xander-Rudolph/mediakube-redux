@@ -49,7 +49,9 @@ global:
   ###################
   # other variables #
   ###################
-  autheliadbpass: autheliaDB
+  autheliaUser: YOUR_AUTHELIA_DBUSERNAME
+  autheliaDatabase: YOUR_AUTHELIA_DBNAME
+  autheliaDbPass: YOUR_AUTHELIA_DBPASSWORD
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr
@@ -124,9 +126,9 @@ authelia:
         enabled: true
         host: postgres
         port: 5432
-        database: authelia
+        database: YOUR_AUTHELIA_DBNAME
         schema: public
-        username: authelia
+        username: YOUR_AUTHELIA_DBUSERNAME
         timeout: 5s
         tls:
           enabled: false
