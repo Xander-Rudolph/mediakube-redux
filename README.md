@@ -75,6 +75,6 @@ Then run the command `pwsh` to start a powershell session.
 
 
 ## How to test the VPN
-After spooling the VPN you can use to confirm net routing on each container using the following:
+After spooling the cluster, to test the VPN, use the following:
 
-`curl checkip.amazonaws.com`
+`kubectl exec -it service/transmission -- curl checkip.amazonaws.com`
