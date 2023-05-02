@@ -3,9 +3,9 @@ name: Build Docker images
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - ./docker/**
-    #   - ./.github/workflows/Docker build-release.yml
+    paths:
+      - ./docker/**
+      - ./.github/workflows/Docker build-release.yml
   pull_request:
 
 jobs:
@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: OpenAI PR Review
         uses: detectiveCrow/ai-review-action@latest
         env:
