@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: "{{ .Release.Name }}-vpn-configmap"
 data:
-  REGION: {{ .Values.vpn.region }}
-  CONNECTIONSTRENGTH: {{ .Values.vpn.connectionStrength }}
+  LOC: {{ .Values.vpn.LOC }}

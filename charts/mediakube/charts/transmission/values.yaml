@@ -20,12 +20,11 @@ password: YOUR_PASSWORD
 vpn:
   username: YOUR_VPN_USERNAME
   password: YOUR_VPN_PASSWORD
-  region: us_east # EX us_east, us_west
-  connectionStrength: strong
+  LOC: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
 
 sidecarimage:
-  name: pia-vpn
-  repository: ghcr.io/xander-rudolph/pia-vpn
+  name: docker-wireguard-pia
+  repository: thrnz/docker-wireguard-pia
   tag: latest
   pullPolicy: Always
 
