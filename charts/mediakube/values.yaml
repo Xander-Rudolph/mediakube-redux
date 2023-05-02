@@ -95,7 +95,6 @@ authelia:
     enabled: true
     size: 10Gi
   secret:
-    #TODO: I think this needs to be managed in order to prevent needing a clean postgres DB each time
     storageEncryptionKey:
       value: "YOUR_ENCRYPTION_KEY" # Must be 20 characters long
     storage:
