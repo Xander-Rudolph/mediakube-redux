@@ -30,7 +30,6 @@ config:
   InstanceName: Radarr
 
 postgres:
-  DATABASE_NAME: "radarr"
   DATABASE_USER: "radarr"
   DATABASE_PASSWORD: "radarr"
 
