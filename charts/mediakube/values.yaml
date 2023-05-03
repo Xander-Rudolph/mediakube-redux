@@ -339,19 +339,3 @@ transmission:
     OPENVPN_CONFIG: YOUR_VPN_REGION
   # # optional  
   # configPath: transmission
-
-############################################
-# Disabled due to concerns around security #
-############################################
-# requestrr:
-#   hostPath: requestrr # use only one... host or config
-#   fullnameOverride: requestrr
-#   config:
-#     discordAppId: YOUR_DISCORD_APPID
-#     discordBotToken: YOUR_DISCORD_BOTTOKEN
-#     # optional
-#     UrlBase: /requestrr
-#     Port: 4545
-#     ombi: ombi
-#     sonarr: sonarr
-#     radarr: radarr
