@@ -3,4 +3,6 @@ kind: ConfigMap
 metadata:
   name: "{{ .Release.Name }}-vpn-configmap"
 data:
-  LOC: {{ .Values.vpn.LOC }}
+  LOCAL_NETWORK: {{ .Values.vpn.LOCAL_NETWORK }}
+  OPENVPN_PROVIDER: {{ .Values.vpn.OPENVPN_PROVIDER }}
+  OPENVPN_CONFIG: {{ .Values.vpn.OPENVPN_CONFIG }}

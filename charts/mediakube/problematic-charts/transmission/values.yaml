@@ -1,0 +1,37 @@
+image:
+  repository: lscr.io/linuxserver/transmission
+  tag: "latest"
+  pullPolicy: Always
+  containerPort: 9091
+  hostname: transmission
+  # env:
+  #   - name: TZ
+  #     value: UTC
+  #   - name: PGID
+  #     value: "0"
+  #   - name: PUID
+  #     value: "0"
+  #   - name: TRANSMISSION_WEB_HOME
+  #     value: "/kettu/"
+
+username: YOUR_USERNAME
+password: YOUR_PASSWORD
+
+vpn:
+  username: YOUR_VPN_USERNAME
+  password: YOUR_VPN_PASSWORD
+  LOC: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
+
+sidecarimage:
+  name: docker-wireguard-pia
+  repository: thrnz/docker-wireguard-pia
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "transmission"
