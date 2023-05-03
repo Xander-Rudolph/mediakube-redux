@@ -11,7 +11,7 @@ password: YOUR_PASSWORD
 vpn:
   username: YOUR_VPN_USERNAME
   password: YOUR_VPN_PASSWORD
-  LOCAL_NETWORK: "10.43.0.0/16"
+  LOCAL_NETWORK: "10.42.0.0/24" # kubectl describe node | grep CIDRs
   OPENVPN_PROVIDER: PIA
   OPENVPN_CONFIG: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
 
