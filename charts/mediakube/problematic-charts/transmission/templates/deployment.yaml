@@ -38,9 +38,9 @@ spec:
           {{- end }}
           envFrom:
             - secretRef:
-                name: "{{ .Release.Name }}-vpn-secret"
+                name: "{{ .Release.Name }}-transmission-secret"
             - configMapRef:
-                name: "{{ .Release.Name }}-vpn-configmap"
+                name: "{{ .Release.Name }}-configmap"
           args: [ {{.Values.image.args}} ]
           ports:
             - name: http
@@ -50,9 +50,17 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: downloads-vol
-              mountPath: /data
+              mountPath: /downloads
             - name: config-vol
               mountPath: /config
+        - name: "{{ .Values.sidecarimage.name }}"
+          image: "{{ .Values.sidecarimage.repository }}:{{ .Values.sidecarimage.tag }}"
+          imagePullPolicy: {{ .Values.sidecarimage.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: "{{ .Release.Name }}-vpn-secret"
+            - configMapRef:
+                name: "{{ .Release.Name }}-vpn-configmap"
       volumes:
         - name: downloads-vol
           persistentVolumeClaim:

@@ -330,26 +330,12 @@ transmission:
   hostPath: transmission
   fullnameOverride: transmission
   username: YOUR_USERNAME
-  password: YOUR_PASSWORD
+  password: YOUR_PASSWORD  
   vpn:
     username: YOUR_VPN_USERNAME
     password: YOUR_VPN_PASSWORD
-    LOC: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
+    LOCAL_NETWORK: "10.43.0.0/16" # this should be based on the IP subnet for the pods
+    OPENVPN_PROVIDER: PIA
+    OPENVPN_CONFIG: YOUR_VPN_REGION
   # # optional  
   # configPath: transmission
-
-############################################
-# Disabled due to concerns around security #
-############################################
-# requestrr:
-#   hostPath: requestrr # use only one... host or config
-#   fullnameOverride: requestrr
-#   config:
-#     discordAppId: YOUR_DISCORD_APPID
-#     discordBotToken: YOUR_DISCORD_BOTTOKEN
-#     # optional
-#     UrlBase: /requestrr
-#     Port: 4545
-#     ombi: ombi
-#     sonarr: sonarr
-#     radarr: radarr

@@ -78,3 +78,6 @@ Then run the command `pwsh` to start a powershell session.
 After spooling the cluster, to test the VPN, use the following:
 
 `kubectl exec -it service/transmission -- curl checkip.amazonaws.com`
+
+Additionally you can check by going to `localhost/downloads/` and then use a magnet link from here:
+https://ipleak.net/

@@ -1,18 +1,9 @@
 image:
-  repository: lscr.io/linuxserver/transmission
+  repository: haugene/transmission-openvpn
   tag: "latest"
   pullPolicy: Always
   containerPort: 9091
   hostname: transmission
-  # env:
-  #   - name: TZ
-  #     value: UTC
-  #   - name: PGID
-  #     value: "0"
-  #   - name: PUID
-  #     value: "0"
-  #   - name: TRANSMISSION_WEB_HOME
-  #     value: "/kettu/"
 
 username: YOUR_USERNAME
 password: YOUR_PASSWORD
@@ -20,16 +11,16 @@ password: YOUR_PASSWORD
 vpn:
   username: YOUR_VPN_USERNAME
   password: YOUR_VPN_PASSWORD
-  LOC: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
-
-sidecarimage:
-  name: docker-wireguard-pia
-  repository: thrnz/docker-wireguard-pia
-  tag: latest
-  pullPolicy: Always
+  LOCAL_NETWORK: "10.42.0.0/24" # kubectl describe node | grep CIDRs
+  OPENVPN_PROVIDER: PIA
+  OPENVPN_CONFIG: YOUR_VPN_REGION # EX https://serverlist.piaservers.net/vpninfo/servers/v6
 
 service:
   type: ClusterIP
+
+securityContext:
+  capabilities:
+    add: ["NET_ADMIN"]
 
 serviceAccount:
   create: true
