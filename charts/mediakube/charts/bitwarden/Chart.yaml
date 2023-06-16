@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bitwarden
+description: A Helm chart for deploying bitwarden server
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

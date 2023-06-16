@@ -1,0 +1,11 @@
+# https://github.com/bitwarden/server/blob/master/docker-unified/settings.env
+image:
+  repository: bitwarden/server
+  tag: "latest"
+  pullPolicy: Always
+  hostname: bitwarden
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "bitwarden"

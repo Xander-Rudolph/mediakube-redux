@@ -52,6 +52,7 @@ global:
   radarrMainDb: radarrmain
   radarrLogDb: radarrlog
   bazarrDb: bazarr
+  bwDb: bitwarden_vault
   URL: yourdomain.url
   radarrKey: YOUR_RADARR_KEY
   sonarrKey: YOUR_SONARR_KEY
