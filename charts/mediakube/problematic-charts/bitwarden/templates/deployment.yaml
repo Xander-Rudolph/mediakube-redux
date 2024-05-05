@@ -46,31 +46,31 @@ spec:
           {{- if .Values.image.env }}
             {{- toYaml .Values.image.env | nindent 12 }}
           {{- end }}
+            - name: BW_DOMAIN
+              value: {{ .Values.BW_DOMAIN }}
+            - name: BW_DB_PROVIDER
+              value: postgresql
             - name: BW_DB_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Release.Name }}-{{ include ".helm.fullname" . }}-secret"
+                  name: "{{ include ".helm.fullname" . }}-secret"
                   key: DATABASE_NAME        
             - name: BW_DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Release.Name }}-{{ include ".helm.fullname" . }}-secret"
+                  name: "{{ include ".helm.fullname" . }}-secret"
                   key: DATABASE_USER        
             - name: BW_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Release.Name }}-{{ include ".helm.fullname" . }}-secret"
+                  name: "{{ include ".helm.fullname" . }}-secret"
                   key: DATABASE_PASSWORD        
             - name: BW_DB_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: "{{ .Release.Name }}-configmap"
+                  name: postgres-configmap
                   key: POSTGRES_HOSTNAME
-          envFrom:
-            - secretRef:
-                name: "{{ .Release.Name }}-{{ include ".helm.fullname" . }}-secret"
-            - configMapRef:
-                name: "{{ .Release.Name }}-configmap"
+          # envFrom: N/A
           args: [ {{.Values.image.args}} ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

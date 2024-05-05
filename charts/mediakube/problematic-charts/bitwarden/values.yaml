@@ -5,7 +5,17 @@ image:
   pullPolicy: Always
   hostname: bitwarden
 
+BW_DOMAIN: bitwarden.yourdomain.com
+
+service:
+  type: ClusterIP
+
 serviceAccount:
   create: true
   annotations: {}
   name: "bitwarden"
+
+postgres:
+  DATABASE_NAME: "bitwarden_vault"
+  DATABASE_USER: "warden"
+  DATABASE_PASSWORD: "bitwarden"

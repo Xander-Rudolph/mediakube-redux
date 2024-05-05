@@ -8,9 +8,6 @@ dependencies:
   - name: traefik
     version: "^10.24.2"
     repository: https://helm.traefik.io/traefik
-  - name: authelia
-    version: "^0.8.57"
-    repository: https://charts.authelia.com
   - name: bazarr
     version: "^0"
     repository: "file://./charts/bazarr"
@@ -35,15 +32,18 @@ dependencies:
   - name: readarr
     version: "^0"
     repository: "file://./charts/readarr"
-  - name: redis
-    version: "^0"
-    repository: "file://./charts/redis"
   - name: sonarr
     version: "^0"
     repository: "file://./charts/sonarr"
   - name: transmission
     version: "^0"
     repository: "file://./charts/transmission"
+  # - name: redis
+  #   version: "^0"
+  #   repository: "file://./charts/redis"
   # - name: requestrr
   #   version: "^0"
   #   repository: "file://./charts/requestrr"
+  # - name: authelia
+  #   version: "^0.8.57"
+  #   repository: https://charts.authelia.com
