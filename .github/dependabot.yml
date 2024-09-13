@@ -1,0 +1,37 @@
+version: 2
+registries:
+  nuget-org:
+    type: nuget-feed
+    url: https://api.nuget.org/v3/index.json
+  nuget-ghp:
+    type: nuget-feed
+    url: https://nuget.pkg.github.com/xander-rudolph/index.json
+    token: ${{ secrets.DEPENDABOT_TOKEN }}
+    
+updates:
+  # # NuGet dependencies
+  # - package-ecosystem: "nuget"
+  #   directory: "/nuget"
+  #   schedule:
+  #     interval: "monthly"
+  #   registries:
+  #     - nuget-org
+  #     - nuget-ghp
+
+  # # Node.js dependencies
+  # - package-ecosystem: "npm"
+  #   directory: "/node" 
+  #   schedule:
+  #     interval: "monthly"
+  
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/docker"
+    schedule:
+      interval: "monthly"
+
+  # helm dependencies
+  - package-ecosystem: "helm"
+    directory: "/charts"
+    schedule:
+      interval: "monthly"
