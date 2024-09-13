@@ -11,11 +11,11 @@ on:
 jobs:
   review:
     if: ${{ github.event_name == 'pull_request' }}
-    uses: xander-rudolph/.github/.github/workflows/ollama-pr.yml@build-provenance
+    uses: xander-rudolph/.github/.github/workflows/ollama-pr.yml@main
 
   docker-build:
     if: ${{ github.event_name != 'pull_request' }}
-    uses: xander-rudolph/.github/.github/workflows/docker-publish.yml@build-provenance
+    uses: xander-rudolph/.github/.github/workflows/docker-publish.yml@main
     strategy:
       matrix:
         image: ['postgres-prep']
@@ -24,4 +24,5 @@ jobs:
       # optional
       working_dir: ./docker/${{ matrix.image }}
       trigger_release: ${{ github.ref_name == 'main' }}
+      gitversion: true
     secrets: inherit
