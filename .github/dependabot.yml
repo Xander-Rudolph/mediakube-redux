@@ -30,8 +30,3 @@ updates:
     schedule:
       interval: "monthly"
 
-  # helm dependencies
-  - package-ecosystem: "helm"
-    directory: "/charts"
-    schedule:
-      interval: "monthly"
