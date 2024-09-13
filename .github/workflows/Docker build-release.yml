@@ -24,4 +24,5 @@ jobs:
       # optional
       working_dir: ./docker/${{ matrix.image }}
       trigger_release: ${{ github.ref_name == 'main' }}
+      gitversion: true
     secrets: inherit
