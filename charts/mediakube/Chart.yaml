@@ -20,6 +20,10 @@ dependencies:
   - name: ombi
     version: "^0"
     repository: "file://./charts/ombi"
+    #TODO play with
+  # - name: overseer
+  #   version: "^0"
+  #   repository: "file://./charts/overseer"
   - name: postgresql
     version: "^0"
     repository: "file://./charts/postgresql"
